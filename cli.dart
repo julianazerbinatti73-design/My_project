@@ -1326,6 +1326,4 @@ Future<String> getWikipediaArticle(String articleTitle) async {
   return 'Error: Failed to fetch article "$articleTitle". Status code: ${response.statusCode}';
 }
 
-Oi
-
-oiii marii amoo <33  
+funcionou ai?
