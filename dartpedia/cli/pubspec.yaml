@@ -142,22 +142,109 @@
 # 6 packages  have newer versions incompatible with dependency constraints.
 # Try 'dart pub outdated' for more information.
 # -----------------------------------------------------------------------------
+
+#Versao: 0.0.2
 #
-# Codigo valido ate aqui:
+#Data: 11/05/2026
 #
-# Codigo:
+#Descricao do codigo: Adicionar command_runner como dependência
 #
+#Agora que você criou o command_runner pacote e adicionou uma CommandRunner classe de espaço reservado, precisa informar ao seu cli aplicativo que ele depende dele command_runner. Como o command_runner pacote está localizado localmente dentro do seu projeto, você pode usar uma dependência de caminho .
+
+#Abra o cli/pubspec.yamlarquivo.
+
+#Observação
+#Certifique-se de abrir o /dartpedia/cli/pubspec.yaml arquivo correto. Quando você criou o command_runner pacote, ele também veio com um /dartpedia/command_runner/pubspec.yaml arquivo.
+
+#Como o cli pacote é um pacote de aplicativo e não se destina à publicação no pub.dev, adicione `--pub-dev` publish_to: none após o name campo. Isso ajuda a evitar publicações acidentais e impede avisos do analisador sobre a adição de dependências de caminho.
+
+#name: cli
+#publish_to: none
+# ...
+#Localize a dependencies seção. Adicione as seguintes linhas:
+
+#dependencies:
+#  http: ^1.3.0 # Keep your existing http dependency
+#  command_runner:
+#    path: ../command_runner # Points to your local command_runner package
+
+#Esta seção informa ao cli aplicativo que ele deve depender do command_runner pacote e especifica que o pacote está localizado no ../command_runner diretório (relativo ao clidiretório).
+
+#Execute o comando dart pub get no /dartpedia/cli diretório do seu terminal para obter a nova dependência.
+
+#Codigo:
+#
+#name: cli
+#publish_to: none
+#description: A sample command-line application.
+#version: 1.0.0
+#repository: https://github.com/my_org/my_repo
+
+#environment:
+#  sdk:   ^3.11.3
+
+# Add regular dependencies here.  //Comentario
+#dependencies:
+#  path: ^1.9.0
+#  http: ^1.3.0
+#  command_runner:
+#    path: ../command_runner 
+
+#dev_dependencies:
+#  lints: ^6.0.0
+#  test: ^1.25.6
+
+#Saida padrao ao executar o codigo: 
+#
+#Comando: dart pub get
+#
+#Saida: Resolving dependencies... //Na primeira vez que rodar o codigo
+#Downloading packages... 
+#  _fe_analyzer_shared 99.0.0 (100.0.0 available)
+#  analyzer 12.1.0 (13.0.0 available)
+#+ command_runner 1.0.0 from path ../command_runner
+#  matcher 0.12.19 (0.12.20 available)
+#  test 1.31.0 (1.31.1 available)
+#  test_api 0.7.11 (0.7.12 available)
+#  test_core 0.6.17 (0.6.18 available)
+#  vm_service 15.1.0 (15.2.0 available)
+#Changed 1 dependency!
+#
+#Comando: dart pub get 
+#
+#Saida: Resolving dependencies... //Saida padrao apos rodar o codigo novamente
+#Downloading packages... 
+#  _fe_analyzer_shared 99.0.0 (100.0.0 available)
+#  analyzer 12.1.0 (13.0.0 available)
+#+ command_runner 1.0.0 from path ../command_runner
+#  matcher 0.12.19 (0.12.20 available)
+#  test 1.31.0 (1.31.1 available)
+#  test_api 0.7.11 (0.7.12 available)
+#  test_core 0.6.17 (0.6.18 available)
+#  vm_service 15.1.0 (15.2.0 available)
+#Changed 1 dependency!
+#
+#------------------------------------------------------------------------------
+#
+#Codigo ate aqui:
+#
+#Codigo:
+
 name: cli
-description: A sample command-line application
-version: 1.1.0
+publish_to: none
+description: A sample command-line application.
+version: 1.0.0
 repository: https://github.com/my_org/my_repo
 
 environment:
   sdk:   ^3.11.3
 
+# Add regular dependencies here.
 dependencies:
   path: ^1.9.0
   http: ^1.3.0
+  command_runner:
+    path: ../command_runner
 
 dev_dependencies:
   lints: ^6.0.0
