@@ -1,42 +1,97 @@
-/*-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-Versao: 0.0.0
+//Informacoes:
 
-Data: 11/05/2026
+//Este arquivo contem a implementacao real (a logica) do pacote command_runner.
 
-Descricao do codigo: Abra o arquivo comando_runner/lib/src/comando_runner_base.dart.O.
+//command_runner_base.dart - Localizado em /dartpedia/command_runner/lib/src/
 
-Remova qualquer código de espaço reservado existente e adicione o seguinte Runner de comando classe para comando_runner/lib/src/comando_runner_base.dart¡::
+//Outras informacoes importantes sobre o pacote:
 
-classe Runner de comando {
-  /// Executa a lógica de aplicação da linha de comando com os argumentos dados.
-  Futuro<vazio› › correr((S)List<Barbante› › entrada(S) assíncrono {
-    imprimir((S)´ 'CommandRunner recebeu argumentos: $entrada´ '(S)¡;
-  O}
-O}
-Destaques do código anterior:
+//site            :
 
-Runner de comando é uma classe que serve como um stand-in simplificado por enquanto. O ITS correr método atualmente apenas imprime os argumentos que recebe. Em capítulos posteriores, você expandirá essa classe para lidar com análise de comandos complexos e configuráveis.
-Futuro<void> é um tipo de retorno que indica que este método pode realizar operações assíncronas, mas não retorna um valor.
+//E-mail                    : Juliana Zerbinatti Sendon Garrido <julianazerbinatti73@gmail.com>
 
-Codigo:
+//Manutencao      :
 
+//-----------------------------------------------------------------------------
+
+//Funcionamento:
+
+//Define a classe CommandRunner e o metodo run(), que e responsavel por receber e processar os comandos enviados pelo aplicativo cli.
+
+//Obs. Importante ! Este motor eh simplificado por enquanto; a analise de comandos complexos sera integrada aqui em capitulos posteriores.
+
+//-----------------------------------------------------------------------------
+
+//Dicionario do versionamento:
+
+//v = versao
+
+//0 = Inicio do versionamento
+
+//. = Implementacao de versionamento
+
+//1 = Proxima versao, 2, proxima versao, e assim por diante.
+
+//-----------------------------------------------------------------------------
+
+//Historico de Versionamento:
+
+//-----------------------------------------------------------------------------
+
+//Versao: 0.0.0
+
+//Data:11/05/2026
+
+//Descricao do codigo: Codigo original do pacote
+
+//Codigo:
 
 // TODO: Put public facing types in this file.
 
 /// Checks if you are awesome. Spoiler: you are.
-class Awesome {
-  bool get isAwesome => true;
+//class Awesome {    //Ativo      
+//  bool get isAwesome => true;    //Ativo
+//}   //Ativo
+
+//-----------------------------------------------------------------------------
+
+//Versao: 0.0.1
+
+//Data:11/05/2026
+
+//Descricao do codigo: Remova qualquer código de espaço reservado existente e adicione a seguinte CommandRunner classe a command_runner/lib/src/command_runner_base.dart:
+
+//class CommandRunner {
+  /// Runs the command-line application logic with the given arguments.
+//  Future<void> run(List<String> input) async {
+//    print('CommandRunner received arguments: $input');
+//  }
+//}
+//Principais trechos do código anterior:
+
+//CommandRunner é uma classe que serve como substituta simplificada por enquanto. Seu runmétodo atualmente apenas imprime os argumentos recebidos. Em capítulos posteriores, você expandirá essa classe para lidar com a análise de comandos complexos e configuráveis.
+//Future<void> é um tipo de retorno que indica que este método pode executar operações assíncronas, mas não retorna um valor.
+
+//Codigo:
+
+//class CommandRunner {
+  /// Runs the command-line application logic with the given arguments.
+//  Future<void> run(List<String> input) async {
+//    print('CommandRunner received arguments: $input');
+//  }
+//}  
+
+//-----------------------------------------------------------------------------
+
+//Codigo ate aqui:
+
+//Codigo:
+
+class CommandRunner {
+
+ Future<void> run(List<String> input) async {
+    print('CommandRunner received arguments: $input');
+  }
 }
-
--------------------------------------------------------------------------------
-
-Codigo valido ate aqui:
-*/
-
-classe Runner de comando {
-  /// Executa a lógica de aplicação da linha de comando com os argumentos dados.
-  Futuro<vazio› › correr((S)List<Barbante› › entrada(S) assíncrono {
-    imprimir((S)´ 'CommandRunner recebeu argumentos: $entrada´ '(S)¡;
-  O}
-O}

@@ -10,7 +10,7 @@
 
 //site            :
 
-//Autor           : Maria Eduarda Goncalves da silva <mariaflaviasilvasilva@gmail.com>
+//Autor           : Juliana Zerbinatti Sendon Garrido <julianazerbinatti73@gmail.com>
 
 //Manutencao      :
 
@@ -40,52 +40,7 @@
 
 //Historico de versionamento:
 
-//-----------------------------------------------------------------------------
-
-
-//-----------------------------------------------------------------------------
-
-//Informacoes:
-
-//O pacote command_runner faz parte do projeto Dartpedia.
-
-//Este arquivo funciona como a interface principal do pacote, definindo o queß sera exposto para o aplicativo CLI. command_runner.dart - Fica localizado na pasta dartpedia, em /dartpedia/command_runner/lib/command_runner.dart
-
-//Outras informacoes importantes sobre o command_runner; nosso pacote:
-
-//site            :
-
-//Autor           : Maria Eduarda Goncalves da silva <mariaflaviasilvasilva@gmail.com>
-
-//Manutencao      :
-
-//-----------------------------------------------------------------------------
-
-//Funcionamento:
-
-//Este pacote define a estrutura de comandos. Ele exporta a classe CommandRunner para que ela possa ser utilizada por outras partes do projeto.
-
-//Dentro da pasta dartpedia em /dartpedia/command_runner, rode o comando dart pub get para instalar e organizar as dependencias internas do pacote.
-
-//Obs. Importante ! Este pacote eh uma biblioteca modular e seu comportamento sera expandido nos proximos capitulos para lidar com comandos complexos.
-
-//-----------------------------------------------------------------------------
-
-//Dicionario do versionamento:
-
-//v = versao
-
-//0 = Inicio do versionamento
-
-//. = Implementacao de versionamento
-
-//1 = Proxima versao, 2, proxima versao, e assim por diante.
-
-//-----------------------------------------------------------------------------
-
-//Historico de versionamento:
-
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 
 //Versao: 0.0.1
 
