@@ -199,13 +199,8 @@ Codigo:
 
 import 'dart:collection';
 import 'dart:io';
+
 import 'arguments.dart';
-
-class CommandRunner {
-  final Map<String, Command> _commands = <String, Command>{};
-
-  UnmodifiableSetView<Command> get commands =>
-      UnmodifiableSetView<Command>(<Command>{..._commands.values});
 
 class CommandRunner {
   final Map<String, Command> _commands = <String, Command>{};
@@ -215,6 +210,7 @@ class CommandRunner {
 
   Future<void> run(List<String> input) async {
     final ArgResults results = parse(input);
+
     if (results.command != null) {
       Object? output = await results.command!.run(results);
       print(output.toString());
@@ -239,6 +235,7 @@ class CommandRunner {
 
   String get usage {
     final exeFile = Platform.script.path.split('/').last;
+
     return 'Usage: dart bin/$exeFile <command> [commandArg?] [...options?]';
   }
 } 

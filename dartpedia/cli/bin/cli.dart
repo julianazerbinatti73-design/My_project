@@ -1209,7 +1209,6 @@ Comando: dart run bin/cli.dart wikipedia Computer_programming
 Saida : CommandRunner received arguments: [wikipedia, Computer_programming] 
 
 codigo : 
-*/
 
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -1220,5 +1219,68 @@ void main(List<String> arguments) async { // main agora é async
   await runner.run(arguments); // Chama o método run, aguardando a conclusão
 }
 
+-------------------------------------------------------------------------------
+
+Data: 21/05/2026
+
+Versao: 0.0.15
+
+Descricao do codigo: Tarefa 4: Atualizar cli.dart para usar o novo CommandRunner
+#
+Modificar cli/bin/cli.dart para usar o novo Runner de comando e, e Comando de Ajuda.O.
+
+Abrir o cli/bin/cli.dart arquivo.
+
+Substitua o código existente pelo seguinte:
+
+cli/bin/cli.dart
+importação ´ 'paquete:command_runner/command_runner.dart´ '¡;
+
+const versão = ´ '0,0.1´ '¡;
+
+vazio principais((S)List<Barbante› › argumentos(S) {
+  var comandoRunner = Runner de comando((S)(S)..adicionar comando((S)Comando de Ajuda((S)(S)(S)¡;
+  comandoRunner.O.correr((S)argumentos(S)¡;
+O}
+Este código cria a Runner de comando instância, acrescenta o Comando de Ajuda a ele usando a método cascata ((S)..addComando(S) que permite chamar um método em um objeto diretamente após criá-lo, e em seguida, executa o corredor de comando com os argumentos de linha de comando.
+
+Codigo: 
+*/
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+// Saida padrao ao executar o codigi?
+
+// Comando: dart run
+
+// Saida: Resolving dependencies in `/home/juliana_garrido/my_project/My_project/dartpedia/cli`... 
+//Downloading packages... 
+//Got dependencies in `/home/juliana_garrido/my_project/My_project/dartpedia/cli`.
+//Building package executable... 
+//Built cli:cli.
+//Unhandled exception:
+//Bad state: No element
+//#0      _Array.first (dart:core-patch/array.dart:52:5)
+//#1      CommandRunner.parse (package:command_runner/src/command_runner_base.dart:228:39)
+//#2      CommandRunner.run (package:command_runner/src/command_runner_base.dart:212:32)
+//#3      main (file:///home/juliana_garrido/my_project/My_project/dartpedia/cli/bin/cli.dart:1256:17)
+//#4      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)
+//#5      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)
+
+// Comando: dart analyze
 
 
+// Saida: Analyzing bin...                       0.3s
+//No issues found!
+
+// Comando: Dart bin/cli.dart
+
+// Saida: Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
+//help
