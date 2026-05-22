@@ -1245,18 +1245,17 @@ O}
 Este código cria a Runner de comando instância, acrescenta o Comando de Ajuda a ele usando a método cascata ((S)..addComando(S) que permite chamar um método em um objeto diretamente após criá-lo, e em seguida, executa o corredor de comando com os argumentos de linha de comando.
 
 Codigo: 
-*/
 
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.1';
+const version = '0.0.15';
 
 void main(List<String> arguments) {
   var commandRunner = CommandRunner()..addCommand(HelpCommand());
   commandRunner.run(arguments);
 }
 
-// Saida padrao ao executar o codigi?
+// Saida padrao ao executar o codigo: 
 
 // Comando: dart run
 
@@ -1283,4 +1282,26 @@ void main(List<String> arguments) {
 // Comando: Dart bin/cli.dart
 
 // Saida: Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
-//help
+
+// Comando: dart run bin/cli.dart help
+
+// Saida: Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
+// help:  Prints usage information to the command line.
+
+-------------------------------------------------------------------------------
+*/
+
+//Codigo ate aqui: 
+
+//Codigo: 
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.15';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+
