@@ -78,15 +78,13 @@ Codigo:
 
   class CommandRunner {
       Runs the command-line application logic with the given arguments.
-    Future<void> run(List<String> input) async {                                                                                      print('CommandRunner received arguments: $input');
+    Future<void> run(List<String> input) async {print('CommandRunner received arguments: $input');
   }
 }  
 
 -------------------------------------------------------------------------------
 
-Codigo ate aqui:
-
-Version 0.0.2
+Versao: 0.0.2
 
 Data : 19/05/2026
 
@@ -146,7 +144,6 @@ Aqui estão os principais detalhes de implementação:
 
 °parse() e run(): Avalia a entrada do usuário, identifica o correspondente Command no mapa e usa await para chamar o método do comando run().
 
-
 Codigo:
 
 import 'dart:collection';
@@ -190,16 +187,13 @@ class CommandRunner {
 }
 
 -------------------------------------------------------------------------------
-
-Codigo ate aqui : 
-
-Codigo: 
-
 */
+//Codigo ate aqui : 
+
+//Codigo: 
 
 import 'dart:collection';
 import 'dart:io';
-
 import 'arguments.dart';
 
 class CommandRunner {
@@ -239,5 +233,3 @@ class CommandRunner {
     return 'Usage: dart bin/$exeFile <command> [commandArg?] [...options?]';
   }
 } 
-
-

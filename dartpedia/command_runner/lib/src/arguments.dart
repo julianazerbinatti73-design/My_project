@@ -58,6 +58,7 @@ Primeiro, você definirá uma Argumentclasse, uma Optionclasse e uma Commandclas
 Crie o arquivo command_runner/lib/src/arguments.dart. Este arquivo conterá as definições para suas classes Argument, Option, Command, e .ArgResults
 
 Codigo: // Arquivo arguments.dart inicializado.
+
 ------------------------------------------------------------------------------
 
 Versao: 0.0.1
@@ -70,19 +71,19 @@ command_runner/lib/src/arguments.dart
 
 enum OptionType { flag, option }
 
-Isso enumrepresenta o tipo de opção, que pode ser um `Enum` flag (uma opção booleana) ou um `Enum` option(uma opção que aceita um valor). Enums são úteis para representar um conjunto fixo de valores possíveis.
- 
+Isso enumrepresenta o tipo de opção, que pode ser um `Enum` flag (uma opção booleana) ou um `Enum` option(uma opção que aceita um valor). Enums são úteis para representar um conjunto fixo de valores possíveis. 
 
 Codigo: 
 
-
-
 enum OptionType { flag, option } 
 
-
 Saida padrao ao executar o codigo:
+
 Comando: dart analyze
-Saida: Analyzing command_runner... No issues found!
+
+Saida: Analyzing command_runner...
+No issues found!
+
 ------------------------------------------------------------------------------
 
 Versao: 0.0.2
@@ -119,7 +120,6 @@ Com a Argument classe totalmente definida, você tem uma interface comum para to
 
 Codigo: 
 
-
 enum OptionType { flag, option }
 
 abstract class Argument {
@@ -130,14 +130,13 @@ abstract class Argument {
   String get usage;
 }
 
-//Saida padrao ao executar o codigo:
+Saida padrao ao executar o codigo:
 
-//Comando: dart analyze
+Comando: dart analyze
 
-//Saida: Analyzing command_runner... No issues found!
+Saida: Analyzing command_runner... No issues found!
 
 -------------------------------------------------------------------------------
-
 
 Versao: 0.0.3
 
@@ -173,10 +172,8 @@ O pegador usage fornecerá uma string mostrando como usar o argumento.
 
 Com a Argument classe totalmente definida, você tem uma interface comum para todos os tipos de argumentos de linha de comando. Em seguida, você irá expandir isso definindo Option, um tipo específico de argumento que estende Argument.
 
-
 Codigo : 
 
-
 enum OptionType { flag, option }
 
 abstract class Argument {
@@ -223,13 +220,14 @@ class Option extends Argument {
     return '--$name: $help';
   }
 }
-
 
 Saida padrao ao executar o codigo:
-Comando: dart analyze
-Saida: Analyzing command_runner... No issues found! 
--------------------------------------------------------------------------------
 
+Comando: dart analyze
+
+Saida: Analyzing command_runner... No issues found! 
+
+-------------------------------------------------------------------------------
 
 Versao: 0.0.4
 
@@ -285,7 +283,6 @@ Também adiciona type (usando o OptionType enum) um método opcional abbr para u
 
 Com o Option argumento `complete`, você tem um tipo especializado de argumento. Em seguida, você definirá a Command classe, outro tipo de argumento que representará as principais ações que um usuário pode executar em seu aplicativo de linha de comando (CLI). 
 
-
 Codigo : 
 
 import '../command_runner.dart';
@@ -324,18 +321,18 @@ abstract class Command extends Argument {
   @override String? valueHelp;
 } 
 
-//Saida padrao ao executar o codigo:
+Saida padrao ao executar o codigo:
 
-//Comando: dart analyze
+Comando: dart analyze
 
-//Saida: Analyzing command_runner... No issues found!
+Saida: Analyzing command_runner... 
+No issues found!
+
 -------------------------------------------------------------------------------
 
 Versao: 0.0.5
 
-
 Data: 19/05/2026
-
 
 Descricao do codigo: Defina um abstract class chamado Command que também extends Argument.
 
@@ -506,10 +503,7 @@ abstract class Command extends Argument {
 
 A Command classe agora fornece uma base sólida para todos os comandos em seu aplicativo CLI. Com a hierarquia de classes implementada, você está pronto para definir ArgResults o armazenamento da entrada analisada. 
 
-
 Codigo:
-
-
 
 import 'dart:collection';
 import '../command_runner.dart';
@@ -558,19 +552,18 @@ abstract class Command extends Argument {
   }
 }
 
-// Saida padrao ao executar o codigo:
+Saida padrao ao executar o codigo:
 
-//Comando: dart analyze
+Comando: dart analyze
 
-//Saida: Analyzing command_runner... No issues found!
+Saida: Analyzing command_runner... 
+No issues found!
 
 -------------------------------------------------------------------------------
 
 Versao: 0.0.6
 
-
 Data: 19/05/2026
-
 
 Descricao do codigo: Defina uma classe chamada ArgResults.
 
@@ -655,17 +648,17 @@ Saida padrao ao executar o codigo:
 
 Comando: dart analyze
 
-Saida: Analyzing command_runner... No issues found!
+Saida: Analyzing command_runner...
+No issues found!
+
 -------------------------------------------------------------------------------
-
-Codigo ate aqui: 
-
-Codigo:
 */
+//Codigo ate aqui: 
+
+//Codigo:
 
 import 'dart:async';
 import 'dart:collection';
-
 import '../command_runner.dart';
 
 enum OptionType { flag, option }

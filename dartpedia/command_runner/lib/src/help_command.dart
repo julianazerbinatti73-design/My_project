@@ -1,6 +1,6 @@
 /*-----------------------------------------------------------------------------
 
- Informações
+Informações
 
 O arquivo `help_command.dart` faz parte do projeto Dartpedia.
 
@@ -22,26 +22,24 @@ Manutenção:
 
 Funcionamento
 
-O comando `HelpCommand`, ao ser executado, exibe informações de uso da aplicação e dos comandos registrados no `CommandRunner`.
+Inicialmente o command_runner, ao ser executado, serve como a biblioteca principal que vai gerenciar e estruturar as regras de POO do nosso interpretador. 
+Este arquivo especifico implementa um comando especializado de ajuda (HelpCommand).
 
-Exemplo de execução:
+Dentro da pasta dartpedia em dartpedia/command_runner rode o comando dart analyze; o analisador do Dart deve verificar o arquivo help_command.dart e validar que a estrutura da nova
+classe nao possui erros de sintaxe ou de compilacao.
 
-Dentro da pasta do projeto `dartpedia/command_runner`, execute o seguinte comando:
-
-dart analyze
-
-Saída esperada:
-
-Analyzing command_runner...
-No issues found!
+Obs. Importante ! Este aplicativo esta em desenvolvimento e ao longo do tempo o comportamento do aplicativo pode mudar. Este arquivo depende da biblioteca nativa 'dart:async' e possui vinculo direto com o arquivo 'arguments.dart'.
 
 -------------------------------------------------------------------------------
+Dicionario do versionamento:
 
-Observação
+v = versao
 
-A classe `HelpCommand` demonstra o uso de herança em Dart, utilizando recursos da classe `Command` para adicionar opções, sobrescrever o método `run()` e acessar o estado `runner` para gerar mensagens de ajuda e uso da aplicação.
+0 = Inicio do versionamento
 
+. = Implementacao de versionamento
 
+1 = Proxima versao, 2, proxima versao, e assim por diante.
 -------------------------------------------------------------------------------
 
 Historico
@@ -49,16 +47,18 @@ Historico
 -------------------------------------------------------------------------------
 
 Versao: 0.0.0
+
 Data: 21/05/2026
+
 Descricao do codigo: Criar um comando de ajuda
 
 Crie um HelpCommand objeto que estenda a Commandclasse e imprima informações de uso.
 
 Crie o arquivo command_runner/lib/src/help_command.dart.
 
--------------------------------------------------------------------------------
-
 Codigo: // Arquivo help_command.dart inicializado.
+
+-------------------------------------------------------------------------------
 
 versao: 0.0.1
 
@@ -118,7 +118,7 @@ class HelpCommand extends Command {
 
 A HelpCommandclasse demonstra os benefícios da herança. Ela utiliza os métodos da classe pai para configurar suas opções, sobrescreve o runmétodo abstrato e acessa o runnerestado para gerar a mensagem de uso.
 
-Código:
+Codigo:
 
 import 'dart:async';
 
@@ -175,12 +175,11 @@ Comando: dart analyze
 Saida: Analyzinf command_runner... 
 No issues found!
 
---------------------------
-
-Codigo ate aqui:
-
-Codigo:
+-------------------------------------------------------------------------------
 */
+//Codigo ate aqui:
+
+//Codigo:
 
 import 'dart:async';
 

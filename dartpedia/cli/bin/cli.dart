@@ -337,11 +337,7 @@ Voce deveria ver:
 
 searchWikipedia received arguments: null
 
-
-
 Codigo:
-
-
 
 const version = '0.0.7';
 
@@ -367,7 +363,6 @@ void printUsage() {
     "The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'"
   );
 }
-
 
 // Saida padrao ao executar o codigo:
 
@@ -436,7 +431,6 @@ stdin.readLineSync() ?? ''Le a entrada do usuario. Embora stdin.readLineSync() p
 arguments.join(' ') Concatena todos os elementos da arguments lista em uma unica string, usando um espaÃ§o como separador. Por exemplo, ['Dart', 'Programming'] torna-se "Dart Programming". Isso eh crucial para tratar entradas de linha de comando com varias palavras como uma unica frase de pesquisa.
 
 A analise estÃ¡tica do Dart pode detectar que a articleTitle variavel eh garantidamente inicializada quando a instrucao `print` eh executada. Independentemente do caminho percorrido dentro do corpo desta funcao, a variavel nao pode ser nula.
-
 
 import 'dart:io';
 
@@ -521,10 +515,7 @@ void searchWikipedia(List<String>? arguments) {
   print('(Pretend this is an article about "$articleTitle")');
 }
 
-
-
 Codigo:
-
 
 import 'dart:io';
 
@@ -589,7 +580,7 @@ Versao: 0.0.10
 
 Data: 26/04/2026
 
-Descricao do codigo:Importar o pacote HTTP.
+Descricao do codigo: Importar o pacote HTTP.
 
 Agora que voce adicionou o HTTP pacote, precisa importa-lo para o seu arquivo Dart para usar suas funcionalidades.
 
@@ -602,7 +593,6 @@ import 'package:http/http.dart' as http; // Add this line
 Esta linha importa o http pacote e atribui a ele o alias http. Depois disso, voce pode se referir a classes e funcoes dentro do http pacote usando http.(poe exemplo, http.Client, http.get). Á as http parte pe uma convencao padrao para evitar conflitos de nomenclatura caso outra biblioteca importada tambem tenha uma classe ou funcao com nome semelhante
 
 Codigo: 
-
 
 import 'dart:io';
 
@@ -903,7 +893,6 @@ print(articleContent): Imprime o resumo do artigo buscado como uma string JSON b
 
 Codigo: 
 
-
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -940,7 +929,6 @@ void searchWikipedia(List<String>? arguments) async {
     print('Looking up articles about "$articleTitle". Please wait.');
     print('Here ya go!');
     print('(Pretend this is an article title about "$articleTitle")');
-
 
  var articleContent = await getWikipediaArticle(articleTitle);
  print(articleContent); // Print the full article response (raw JSON for now)
@@ -1048,8 +1036,6 @@ searchWikipedia(inputArgs): Isso liga diretamente. Já que não precisa fazer qu
 
 Codigo: 
 
-
-
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -1153,17 +1139,17 @@ Future<String> getWikipediaArticle(String articleTitle) async {
 
 -------------------------------------------------------------------------------  
 
-Version 0.0.14
+Versao: 0.0.14
 
 Data : 12/05/2026
 
-Descrição do codigo : Importar e usar o command_runnerpacote
+Descrição do codigo : Importar e usar o command_runner pacote
 
-Agora que você adicionou command_runnera classe como dependência, pode importá-la para sua cliaplicação e substituir a lógica de tratamento de argumentos existente pela nova CommandRunnerclasse. Esta etapa também corrige o comportamento de encerramento do programa discutido no final do Capítulo 3. 
+Agora que você adicionou command_runner a classe como dependência, pode importá-la para sua cli aplicação e substituir a lógica de tratamento de argumentos existente pela nova CommandRunner classe. Esta etapa também corrige o comportamento deencerramento do programa discutido no final do Capítulo 3. 
 
-Abra o cli/bin/cli.dartarquivo. 
+1.Abra o cli/bin/cli.dart arquivo. 
 
-Adicione a seguinte declaração de importação no início do arquivo, junto com suas outras importações: 
+2.Adicione a seguinte declaração de importação no início do arquivo, junto com suas outras importações: 
 
 import 'package:command_runner/command_runner.dart';
 Esta declaração importa o command_runnerpacote, tornando a CommandRunnerclasse disponível para uso. 
@@ -1221,28 +1207,30 @@ void main(List<String> arguments) async { // main agora é async
 
 -------------------------------------------------------------------------------
 
-Data: 21/05/2026
-
 Versao: 0.0.15
 
+Data: 21/05/2026
+
 Descricao do codigo: Tarefa 4: Atualizar cli.dart para usar o novo CommandRunner
-#
-Modificar cli/bin/cli.dart para usar o novo Runner de comando e, e Comando de Ajuda.O.
 
-Abrir o cli/bin/cli.dart arquivo.
+Modifique cli/bin/cli.dartpara usar o novo CommandRunnere HelpCommand.
 
-Substitua o código existente pelo seguinte:
+1.Abrir o cli/bin/cli.dart arquivo.
+
+2.Substitua o código existente pelo seguinte:
 
 cli/bin/cli.dart
-importação ´ 'paquete:command_runner/command_runner.dart´ '¡;
 
-const versão = ´ '0,0.1´ '¡;
+import 'package:command_runner/command_runner.dart';
 
-vazio principais((S)List<Barbante› › argumentos(S) {
-  var comandoRunner = Runner de comando((S)(S)..adicionar comando((S)Comando de Ajuda((S)(S)(S)¡;
-  comandoRunner.O.correr((S)argumentos(S)¡;
-O}
-Este código cria a Runner de comando instância, acrescenta o Comando de Ajuda a ele usando a método cascata ((S)..addComando(S) que permite chamar um método em um objeto diretamente após criá-lo, e em seguida, executa o corredor de comando com os argumentos de linha de comando.
+const version = '0.0.15';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+Este código cria uma CommandRunner instância, adiciona o HelpCommand a ela usando um método cascade ( ..addCommand) que permite chamar um método em um objeto diretamente após criá-lo e, em seguida, executa o executor de comandos com os argumentos da linha de comando.
 
 Codigo: 
 

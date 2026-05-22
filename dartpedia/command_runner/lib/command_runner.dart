@@ -4,7 +4,7 @@ Informacoes:
 
 O pacote command_runner faz parte do projeto Dartpedia.
 
-Este arquivo funciona como a interface principal do pacote, definindo o queß sera exposto para o aplicativo CLI. command_runner.dart - Fica localizado na pasta dartpedia, em /dartpedia/command_runner/lib/command_runner.dart
+Este arquivo funciona como a interface principal do pacote, definindo o que sera exposto para o aplicativo CLI. command_runner.dart - Fica localizado na pasta dartpedia, em /dartpedia/command_runner/lib/command_runner.dart
 
 Outras informacoes importantes sobre o command_runner; nosso pacote:
 
@@ -77,7 +77,6 @@ TODO: Export any other libraries intended for clients of this package.
 
 -------------------------------------------------------------------------------
 
-
 Versao: 0.0.2
 
 Data: 11/05/2026
@@ -103,7 +102,6 @@ Isso torna os arquivos arguments.dart, command_runner_base.dart, e help_command.
 
 Codigo: 
 
-
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
@@ -114,10 +112,12 @@ export 'src/command_runner_base.dart';
 export 'src/help_command.dart';
 
 // TODO: Export any libraries intended for clients of this package.
--------------------------------------------------------------------------------
 
-Codigo ate aqui : 
+-------------------------------------------------------------------------------
 */
+//Codigo ate aqui: 
+
+//Codigo:
 
 /// Support for doing something awesome.
 ///
