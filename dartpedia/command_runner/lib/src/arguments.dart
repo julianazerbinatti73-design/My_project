@@ -53,7 +53,7 @@ Data: 19/05/2026
 Descricao do codigo: Inicio do arquivo vazio para preparacao da estrutura.
 Defina a hierarquia de argumentos
 
-Primeiro, você definirá uma Argumentclasse, uma Optionclasse e uma Commandclasse, estabelecendo uma relação de herança.
+1. Primeiro, você definirá uma Argument classe, uma Option classe e uma Command classe, estabelecendo uma relação de herança.
 
 Crie o arquivo command_runner/lib/src/arguments.dart. Este arquivo conterá as definições para suas classes Argument, Option, Command, e .ArgResults
 
@@ -65,13 +65,13 @@ Versao: 0.0.1
 
 Data: 19/05/2026
 
-Descricao do codigo: Defina um enumchamado OptionType. 
+Descricao do codigo: Defina um enum chamado OptionType. 
 
 command_runner/lib/src/arguments.dart  
 
 enum OptionType { flag, option }
 
-Isso enumrepresenta o tipo de opção, que pode ser um `Enum` flag (uma opção booleana) ou um `Enum` option(uma opção que aceita um valor). Enums são úteis para representar um conjunto fixo de valores possíveis. 
+Isso enum representa o tipo de opção, que pode ser um `Enum` flag (uma opção booleana) ou um `Enum` option (uma opção que aceita um valor). Enums são úteis para representar um conjunto fixo de valores possíveis. 
 
 Codigo: 
 
@@ -114,8 +114,8 @@ name é algo String que identifica o argumento de forma única.
 help é um campo opcional String que fornece uma descrição.
 defaultValue é do tipo Object? porque pode ser um bool (para bandeiras) ou um String.
 valueHelp É um parâmetro opcional String para dar uma dica sobre o valor esperado.
-O pegador usage 
-fornecerá uma string mostrando como usar o argumento.
+O pegador usage fornecerá uma string mostrando como usar o argumento.
+
 Com a Argument classe totalmente definida, você tem uma interface comum para todos os tipos de argumentos de linha de comando. Em seguida, você irá expandir isso definindo Option, um tipo específico de argumento que estende Argument.
 
 Codigo: 
@@ -127,6 +127,8 @@ abstract class Argument {
   String? get help;
   Object? get defaultValue;
   String? get valueHelp;
+
+
   String get usage;
 }
 
@@ -139,97 +141,6 @@ Saida: Analyzing command_runner... No issues found!
 -------------------------------------------------------------------------------
 
 Versao: 0.0.3
-
-Data: 19/05/2026
-
-Descricao do codigo: Defina um abstract class chamado Argument. 
-
-Comece definindo a estrutura básica da sua Argument classe. Você a declarará como `BaseClass` abstract, o que significa que ela serve como uma classe base que outras classes podem estender, mas não pode ser instanciada.
- por conta própria.
-
-Abaixo do texto enum que você acabou de adicionar, cole o seguinte código:
-
-command_runner/lib/src/arguments.dart
-// Paste this new class below the enum you added
-abstract class Argument {
-  String get name;
-  String? get help;
-
-  // In the case of flags, the default value is a bool.
-  // In other options and commands, the default value is a String.
-  // NB: flags are just Option objects that don't take arguments
-  Object? get defaultValue;
-  String? get valueHelp;
-
-  String get usage;
-}
-
-name é algo String que identifica o argumento de forma única.
-help é um campo opcional String que fornece uma descrição.
-defaultValue é do tipo Object? porque pode ser um bool (para bandeiras) ou um String.
-valueHelp É um parâmetro opcional String para dar uma dica sobre o valor esperado.
-O pegador usage fornecerá uma string mostrando como usar o argumento.
-
-Com a Argument classe totalmente definida, você tem uma interface comum para todos os tipos de argumentos de linha de comando. Em seguida, você irá expandir isso definindo Option, um tipo específico de argumento que estende Argument.
-
-Codigo : 
-
-enum OptionType { flag, option }
-
-abstract class Argument {
-  String get name;
-  String? get help;
-  Object? get defaultValue;
-  String? get valueHelp;
-  String get usage;
-}
-
-class Option extends Argument {
-  Option(this.name, {required this.type, this.help, this.abbr, this.defaultValue, this.valueHelp});
-  @override final String name;
-  final OptionType type;
-  @override final String? help;
-  final String? abbr;
-  @override final Object? defaultValue;
-  @override final String? valueHelp;
-  @override String get usage {
-    if (abbr != null) return '-$abbr,--$name: $help';
-    return '--$name: $help';
-  }
-}
-enum OptionType { flag, option }
-
-abstract class Argument {
-  String get name;
-  String? get help;
-  Object? get defaultValue;
-  String? get valueHelp;
-  String get usage;
-}
-
-class Option extends Argument {
-  Option(this.name, {required this.type, this.help, this.abbr, this.defaultValue, this.valueHelp});
-  @override final String name;
-  final OptionType type;
-  @override final String? help;
-  final String? abbr;
-  @override final Object? defaultValue;
-  @override final String? valueHelp;
-  @override String get usage {
-    if (abbr != null) return '-$abbr,--$name: $help';
-    return '--$name: $help';
-  }
-}
-
-Saida padrao ao executar o codigo:
-
-Comando: dart analyze
-
-Saida: Analyzing command_runner... No issues found! 
-
--------------------------------------------------------------------------------
-
-Versao: 0.0.4
 
 Data: 19/05/2026
 
@@ -268,7 +179,7 @@ class Option extends Argument {
   final String? valueHelp;
 
   @override
-  String get usage { 
+  String get usage {
     if (abbr != null) {
       return '-$abbr,--$name: $help';
     }
@@ -281,62 +192,75 @@ A extends palavra-chave estabelece a relação de herança. A classe usa a @over
 
 Também adiciona type (usando o OptionType enum) um método opcional abbr para uma forma abreviada da opção. O usage getter é implementado para fornecer instruções claras ao usuário.
 
-Com o Option argumento `complete`, você tem um tipo especializado de argumento. Em seguida, você definirá a Command classe, outro tipo de argumento que representará as principais ações que um usuário pode executar em seu aplicativo de linha de comando (CLI). 
+Com o Option argumento `complete`, você tem um tipo especializado de argumento. Em seguida, você definirá a Command classe, outro tipo de argumento que representará as principais ações que um usuário pode executar em seu aplicativo de linha de comando (CLI).
 
 Codigo : 
-
-import '../command_runner.dart';
 
 enum OptionType { flag, option }
 
 abstract class Argument {
   String get name;
   String? get help;
+
+
   Object? get defaultValue;
   String? get valueHelp;
+
   String get usage;
 }
 
 class Option extends Argument {
-  Option(this.name, {required this.type, this.help, this.abbr, this.defaultValue, this.valueHelp});
-  @override final String name;
+  Option(
+    this.name, {
+    required this.type,
+    this.help,
+    this.abbr,
+    this.defaultValue,
+    this.valueHelp,
+});
+
+
+  @override
+  final String name;
+ 
   final OptionType type;
-  @override final String? help;
+
+  @override
+  final String? help;
+  
   final String? abbr;
-  @override final Object? defaultValue;
-  @override final String? valueHelp;
-  @override String get usage {
-    if (abbr != null) return '-$abbr,--$name: $help';
+  
+  @override
+  final Object? defaultValue;
+
+  @override 
+  final String? valueHelp;
+
+  @override
+  String get usage {
+    if (abbr != null) { 
+      return '-$abbr,--$name: $help';
+    }
+
     return '--$name: $help';
   }
 }
-
-abstract class Command extends Argument {
-  @override String get name;
-  String get description;
-  bool get requiresArgument => false;
-  late CommandRunner runner;
-  @override String? help;
-  @override String? defaultValue;
-  @override String? valueHelp;
-} 
 
 Saida padrao ao executar o codigo:
 
 Comando: dart analyze
 
-Saida: Analyzing command_runner... 
-No issues found!
+Saida: Analyzing command_runner... No issues found! 
 
 -------------------------------------------------------------------------------
 
-Versao: 0.0.5
+Versao: 0.0.4
 
 Data: 19/05/2026
 
 Descricao do codigo: Defina um abstract class chamado Command que também extends Argument.
 
-A Command classe representara uma acao executável. Como ela fornece um modelo para outros comandos seguirem, voce a declarará como abstract.
+A Commandclasse representará uma ação executável. Como ela fornece um modelo para outros comandos seguirem, você a declarará como abstract.
 
 command_runner/lib/src/arguments.dart
 
@@ -345,13 +269,13 @@ abstract class Command extends Argument {
   // Properties and methods will go here
 }
 
-A abstract palavra-chave significa que Command nao pode ser instanciada diretamente. Ela serve como classe base para outras classes.
+A abstract palavra-chave significa que Command não pode ser instanciada diretamente. Ela serve como classe base para outras classes. 
 
-Agora, adicione as propriedades principais. Um comando precisa de um `a` name e um `b` description. Ele também precisa de uma referência ao ` CommandRunnerc` que o executa.
+Agora, adicione as propriedades principais. Um comando precisa de um `a` name e um `b` description . Ele também precisa de uma referência ao ` CommandRunner c` que o executa.
 
 command_runner/lib/src/arguments.dart
 
-abstract class Command extends Argument {
+bstract class Command extends Argument {
   @override
   String get name;
 
@@ -371,9 +295,9 @@ abstract class Command extends Argument {
   String? valueHelp;
 }
 
-A runner propriedade é do tipo CommandRunner, que você definira posteriormente em command_runner_base.dart.
+A runnerpropriedade é do tipo CommandRunner, que você definirá posteriormente em command_runner_base.dart.
 
-Observe a late palavra-chave. Ela indica ao Dart que você promete inicializar essa variável antes mesmo de ela ser acessada, permitindo que você declare uma variável não nula sem precisar atribui-la imediatamente. Isso é útil quando a inicialização de uma variável depende de outros objetos (como um comando sendo adicionado a um executor).
+Observe a late palavra-chave. Ela indica ao Dart que você promete inicializar essa variável antes mesmo de ela ser acessada, permitindo que você declare uma variável não nula sem precisar atribuí-la imediatamente. Isso é útil quando a inicialização de uma variável depende de outros objetos (como um comando sendo adicionado a um executor).
 
 Para que o Dart reconheça esta classe, você deve importar o arquivo que a define. Adicione a seguinte importação ao início do arquivo command_runner/lib/src/arguments.dart:
 
@@ -384,14 +308,14 @@ Em seguida, você atribuirá aos comandos seus próprios conjuntos de opções. 
 
 Em vez de permitir o acesso direto, você expõe as opções por meio de uma visualização somente leitura e não modificável ( UnmodifiableSetView). Essa abordagem é uma parte fundamental do encapsulamento: a prática de restringir o acesso direto ao estado interno de uma classe para evitar interferências não intencionais.
 
-A UnmodifiableSetView classe faz parte da biblioteca de coleções principal do Dart. Para usá-la, você precisa importar essa biblioteca.
+A UnmodifiableSetViewclasse faz parte da biblioteca de coleções principal do Dart. Para usá-la, você precisa importar essa biblioteca.
 
 Atualize as importações no início do seu arquivo para incluir dart:collection:
 
 import 'dart:collection'; // New import
 import '../command_runner.dart';
 
-Agora, adicione a options lista e o getter à sua Command classe:
+Agora, adicione a optionslista e o getter à sua Commandclasse:
 
 abstract class Command extends Argument {
   // ... existing properties ...
@@ -408,7 +332,7 @@ abstract class Command extends Argument {
       UnmodifiableSetView(_options.toSet());
 }
 
-Como _options`options` é privado, o código externo não pode adicionar opções diretamente. Para permitir que os comandos definam suas opções, você fornecerá dois métodos auxiliares internos: `addOptions` addFlag e `addOptions` addOption. Esses métodos instanciarão os Option objetos apropriados e os adicionarão à lista privada.
+Como _options`options` é privado, o código externo não pode adicionar opções diretamente. Para permitir que os comandos definam suas opções, você fornecerá dois métodos auxiliares internos: `addOptions` addFlage `addOptions` addOption. Esses métodos instanciarão os Optionobjetos apropriados e os adicionarão à lista privada.
 
 abstract class Command extends Argument {
   // ... existing properties and getters ...
@@ -454,7 +378,7 @@ abstract class Command extends Argument {
   }
 }
 
-Por fim, cada comando deve ter uma lógica para ser executada quando chamado. Você definirá um run método abstrato que os comandos concretos devem implementar.
+Por fim, cada comando deve ter uma lógica para ser executada quando chamado. Você definirá um runmétodo abstrato que os comandos concretos devem implementar.
 
 Como um comando pode ser síncrono ou assíncrono, seu run método retorna o FutureOr tipo de dart:async, permitindo que ele retorne um valor bruto ou um Future. Esta é a sua última importação obrigatória.
 
@@ -464,7 +388,7 @@ import 'dart:async'; // New import
 import 'dart:collection';
 import '../command_runner.dart';
 
-Agora você pode adicionar o run método abstrato e fornecer a usage implementação para completar a Command classe.
+Agora você pode adicionar o runmétodo abstrato e fornecer a usageimplementação para completar a Command classe.
 
 abstract class Command extends Argument {
   // ... existing properties, getters, and methods ...
@@ -494,17 +418,17 @@ abstract class Command extends Argument {
 
   @override
   String get usage {
-    return '$name: $description';
+    return '$name:  $description';
   }
 }
 
-° run(ArgResults args) Este método abstrato é onde reside a lógica de um comando. As subclasses concretas devem implementá-lo.
-° usage Este getter fornece uma string de uso simples, combinando o comando namee description.
+run(ArgResults args)Este método abstrato é onde reside a lógica de um comando. As subclasses concretas devem implementá-lo.
+usageEste getter fornece uma string de uso simples, combinando o comando namee description.
+A Commandclasse agora fornece uma base sólida para todos os comandos em seu aplicativo CLI. Com a hierarquia de classes implementada, você está pronto para definir ArgResultso armazenamento da entrada analisada.
 
-A Command classe agora fornece uma base sólida para todos os comandos em seu aplicativo CLI. Com a hierarquia de classes implementada, você está pronto para definir ArgResults o armazenamento da entrada analisada. 
+Codigo : 
 
-Codigo:
-
+import 'dart:async'; 
 import 'dart:collection';
 import '../command_runner.dart';
 
@@ -513,42 +437,106 @@ enum OptionType { flag, option }
 abstract class Argument {
   String get name;
   String? get help;
+
   Object? get defaultValue;
   String? get valueHelp;
+
   String get usage;
 }
 
 class Option extends Argument {
-  Option(this.name, {required this.type, this.help, this.abbr, this.defaultValue, this.valueHelp});
-  @override final String name;
+  Option(
+     this.name, {
+     required this.type,
+     this.help,
+     this.abbr, 
+     this.defaultValue,
+     this.valueHelp,
+});
+
+  @override
+  final String name;
+ 
   final OptionType type;
-  @override final String? help;
+
+  @override
+  final String? help;
+
   final String? abbr;
-  @override final Object? defaultValue;
-  @override final String? valueHelp;
-  @override String get usage {
-    if (abbr != null) return '-$abbr,--$name: $help';
-    return '--$name: $help';
+
+  @override
+  final Object? defaultValue;
+ 
+  @override
+  final String? valueHelp;
+
+  @override
+  String get usage {
+    if (abbr != null){ 
+      return '-$abbr,--$name: $help';
+
+
+      return '--$name: $help';
   }
 }
 
+
 abstract class Command extends Argument {
-  @override String get name;
+  @override
+  String get name;
+
   String get description;
+
   bool get requiresArgument => false;
+
   late CommandRunner runner;
-  @override String? help;
-  @override String? defaultValue;
-  @override String? valueHelp;
+
+  @override
+  String? help;
+
+  @override
+  String? defaultValue;
+
+  @override
+  String? valueHelp;
   
   final List<Option> _options = [];
-  UnmodifiableSetView<Option> get options => UnmodifiableSetView(_options.toSet());
+
+  UnmodifiableSetView<Option> get options =>
+      UnmodifiableSetView(_options.toSet());
 
   void addFlag(String name, {String? help, String? abbr, String? valueHelp}) {
-    _options.add(Option(name, help: help, abbr: abbr, defaultValue: false, valueHelp: valueHelp, type: OptionType.flag));
+    _options.add(
+      Option(
+      name,
+      help: help,
+      abbr: abbr,
+      defaultValue: false,
+      valueHelp: valueHelp,
+      type: OptionType.flag
+     ),
+   );
   }
-  void addOption(String name, {String? help, String? abbr, String? defaultValue, String? valueHelp}) {
-    _options.add(Option(name, help: help, abbr: abbr, defaultValue: defaultValue, valueHelp: valueHelp, type: OptionType.option));
+
+
+
+  void addOption(
+    String name, {
+    String? help,
+    String? abbr,
+    String? defaultValue,
+    String? valueHelp,
+}) {
+    _options.add(
+      Option(
+        name,
+        help: help,
+        abbr: abbr,
+        defaultValue: defaultValue,
+        valueHelp: valueHelp,
+        type: OptionType.option,
+      ),
+    );
   }
 }
 
@@ -561,7 +549,7 @@ No issues found!
 
 -------------------------------------------------------------------------------
 
-Versao: 0.0.6
+Versao: 0.0.5
 
 Data: 19/05/2026
 
@@ -620,29 +608,146 @@ enum OptionType { flag, option }
 abstract class Argument {
   String get name;
   String? get help;
+
   Object? get defaultValue;
   String? get valueHelp;
+
   String get usage;
 }
 
 class Option extends Argument {
-  Option(this.name, {required this.type, this.help, this.abbr, this.defaultValue, this.valueHelp});
-  @override final String name;
+  Option(
+    this.name, {
+    required this.type,
+    this.help,
+    this.abbr,
+    this.defaultValue,
+    this.valueHelp,
+  });
+
+  @override
+  final String name;
+
   final OptionType type;
-  @override final String? help;
+
+  @override
+  final String? help;
+
   final String? abbr;
-  @override final Object? defaultValue;
-  @override final String? valueHelp;
-  @override String get usage {
-    if (abbr != null) return '-$abbr,--$name: $help';
+
+  @override
+  final Object? defaultValue;
+
+  @override
+  final String? valueHelp;
+
+  @override
+  String get usage {
+    if (abbr != null) {
+      return '-$abbr,--$name: $help';
+    }
+
     return '--$name: $help';
   }
 }
 
 abstract class Command extends Argument {
-  @override String get name;
-  String
+  @override
+  String get name;
 
+  String get description;
+
+  bool get requiresArgument => false;
+
+  late CommandRunner runner;
+
+  @override
+  String? help;
+
+  @override
+  String? defaultValue;
+
+  @override
+  String? valueHelp;
+
+final List<Option> _options = [];
+
+  UnmodifiableSetView<Option> get options =>
+      UnmodifiableSetView(_options.toSet());
+
+  // A flag is an [Option] that's treated as a boolean.
+  void addFlag(String name, {String? help, String? abbr, String? valueHelp}) {
+    _options.add(
+      Option(
+        name,
+        help: help,
+        abbr: abbr,
+        defaultValue: false,
+        valueHelp: valueHelp,
+        type: OptionType.flag,
+      ),
+    );
+  }
+
+  // An option is an [Option] that takes a value.
+  void addOption(
+    String name, {
+    String? help,
+    String? abbr,
+    String? defaultValue,
+    String? valueHelp,
+  }) {
+    _options.add(
+      Option(
+        name,
+        help: help,
+        abbr: abbr,
+        defaultValue: defaultValue,
+        valueHelp: valueHelp,
+        type: OptionType.option,
+      ),
+    );
+  }
+
+  FutureOr<Object?> run(ArgResults args);
+
+  @override
+  String get usage {
+    return '$name:  $description';
+  }
+}
+
+class ArgResults {
+  Command? command;
+  String? commandArg;
+  Map<Option, Object?> options = {};
+
+  // Returns true if the flag exists.
+  bool flag(String name) {
+    // Only check flags, because we're sure that flags are booleans.
+    for (var option in options.keys.where(
+      (option) => option.type == OptionType.flag,
+    )) {
+      if (option.name == name) {
+        return options[option] as bool;
+      }
+    }
+
+    return false;
+  }
+
+  bool hasOption(String name) {
+    return options.keys.any((option) => option.name == name);
+  }
+
+  ({Option option, Object? input}) getOption(String name) {
+    var mapEntry = options.entries.firstWhere(
+      (entry) => entry.key.name == name || entry.key.abbr == name,
+    );
+
+    return (option: mapEntry.key, input: mapEntry.value);
+  }
+}
 
 Saida padrao ao executar o codigo:
 
@@ -667,11 +772,7 @@ abstract class Argument {
   String get name;
   String? get help;
 
-  // In the case of flags, the default value is a bool.
-  // In other options and commands, the default value is a String.
-  // NB: flags are just Option objects that don't take arguments
   Object? get defaultValue;
-
   String? get valueHelp;
 
   String get usage;
