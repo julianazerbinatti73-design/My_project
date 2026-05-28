@@ -1290,6 +1290,6 @@ const version = '0.0.15';
 void main(List<String> arguments) {
   var commandRunner = CommandRunner()..addCommand(HelpCommand());
   commandRunner.run(arguments);
-}
+ }  
 
 
