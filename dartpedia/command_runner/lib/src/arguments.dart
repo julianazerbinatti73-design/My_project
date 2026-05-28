@@ -304,7 +304,7 @@ Para que o Dart reconheça esta classe, você deve importar o arquivo que a defi
 import '../command_runner.dart';
 
 Em seguida, você atribuirá aos comandos seus próprios conjuntos de opções. Para evitar que outras partes do seu código modifiquem essas opções inesperadamente, você as armazenará em uma variável privada.
- list ( _options). Em Dart, prefixar um nome de variável ou campo com um sublinhado ( _) torna-o privado da biblioteca.
+list ( _options). Em Dart, prefixar um nome de variável ou campo com um sublinhado ( _) torna-o privado da biblioteca.
 
 Em vez de permitir o acesso direto, você expõe as opções por meio de uma visualização somente leitura e não modificável ( UnmodifiableSetView). Essa abordagem é uma parte fundamental do encapsulamento: a prática de restringir o acesso direto ao estado interno de uma classe para evitar interferências não intencionais.
 
@@ -910,4 +910,4 @@ class ArgResults {
 
     return (option: mapEntry.key, input: mapEntry.value);
   }
-}
+} 
