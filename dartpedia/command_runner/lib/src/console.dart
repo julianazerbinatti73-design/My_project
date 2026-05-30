@@ -208,7 +208,7 @@ O}
 Esses métodos utilizam códigos de fuga ANSI ao to aplicar as cores de primeiro plano e de fundo no texto. O The aplicarForeground e, e aplicarAntecedente métodos retornam uma string com os códigos de escape ANSI aplicados.
 
 Codigo:
-*/
+
 
 import 'dart:io';
 
@@ -290,4 +290,119 @@ enum ConsoleColor {
     return '$ansiEscapeLiteral[48;2;$r;$g;${b}m$text$ansiEscapeLiteral[0m';
   }
 }
+-------------------------------------------------------------------------------
 
+Versao: 0.0.2
+
+Data:30/05/2026
+
+Descricao do codigo: Criar uma extensão de string
+
+Em seguida, crie uma extensão na Stringclasse para adicionar métodos utilitários para aplicar cores ao console e formatar o texto. Adicione o seguinte código ao command_runner/lib/src/console.dart arquivo:
+
+// Add this code to the bottom of the file
+extension TextRenderUtils on String {
+  String get errorText => ConsoleColor.red.applyForeground(this);
+  String get instructionText => ConsoleColor.yellow.applyForeground(this);
+  String get titleText => ConsoleColor.lightBlue.applyForeground(this);
+
+  List<String> splitLinesByLength(int length) {
+    final List<String> words = split(' ');
+    final List<String> output = <String>[];
+    final StringBuffer strBuffer = StringBuffer();
+    for (int i = 0; i < words.length; i++) {
+      final String word = words[i];
+      if (strBuffer.length + word.length <= length) {
+        strBuffer.write(word.trim());
+        if (strBuffer.length + 1 <= length) {
+          strBuffer.write(' ');
+        }
+      }
+      // If the next word surpasses length, start the next line
+      if (i + 1 < words.length &&
+          words[i + 1].length + strBuffer.length + 1 > length) {
+        output.add(strBuffer.toString().trim());
+        strBuffer.clear();
+      }
+    }
+
+    // Add left overs
+    output.add(strBuffer.toString().trim());
+    return output;
+  }
+} 
+
+Este código define uma extensão chamada TextRenderUtils na String classe.Ele adiciona três métodos getter para aplicar cores ao console: errorText,instructionText,e titleText.Ele também adiciona um método para dividir uma string em linhas de um comprimento especificado chamado splitLinesByLength. 
+
+Código:
+
+// Add this code to the bottom of the file
+extension TextRenderUtils on String {
+  String get errorText => ConsoleColor.red.applyForeground(this);
+  String get instructionText => ConsoleColor.yellow.applyForeground(this);
+  String get titleText => ConsoleColor.lightBlue.applyForeground(this);
+
+  List<String> splitLinesByLength(int length) {
+    final List<String> words = split(' ');
+    final List<String> output = <String>[];
+    final StringBuffer strBuffer = StringBuffer();
+    for (int i = 0; i < words.length; i++) {
+      final String word = words[i];
+      if (strBuffer.length + word.length <= length) {
+        strBuffer.write(word.trim());
+        if (strBuffer.length + 1 <= length) {
+          strBuffer.write(' ');
+        }
+      }
+      // If the next word surpasses length, start the next line
+      if (i + 1 < words.length &&
+          words[i + 1].length + strBuffer.length + 1 > length) {
+        output.add(strBuffer.toString().trim());
+        strBuffer.clear();
+      }
+    }
+
+    // Add left overs
+    output.add(strBuffer.toString().trim());
+    return output;
+  }
+}
+
+-------------------------------------------------------------------------------
+
+Código ate aqui : 
+
+*/
+
+// Add this code to the bottom of the file
+extension TextRenderUtils on String {
+  String get errorText => ConsoleColor.red.applyForeground(this);
+  String get instructionText => ConsoleColor.yellow.applyForeground(this);
+  String get titleText => ConsoleColor.lightBlue.applyForeground(this);
+
+  List<String> splitLinesByLength(int length) {
+    final List<String> words = split(' ');
+    final List<String> output = <String>[];
+    final StringBuffer strBuffer = StringBuffer();
+    for (int i = 0; i < words.length; i++) {
+      final String word = words[i];
+      if (strBuffer.length + word.length <= length) {
+        strBuffer.write(word.trim());
+        if (strBuffer.length + 1 <= length) {
+          strBuffer.write(' ');
+        }
+      }
+      // If the next word surpasses length, start the next line
+      if (i + 1 < words.length &&
+          words[i + 1].length + strBuffer.length + 1 > length) {
+        output.add(strBuffer.toString().trim());
+        strBuffer.clear();
+      }
+    }
+
+    // Add left overs
+    output.add(strBuffer.toString().trim());
+    return output;
+  }
+}
+ 
