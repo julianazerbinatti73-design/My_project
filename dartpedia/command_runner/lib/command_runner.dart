@@ -114,20 +114,51 @@ export 'src/help_command.dart';
 // TODO: Export any libraries intended for clients of this package.
 
 -------------------------------------------------------------------------------
-*/
-//Codigo ate aqui: 
 
-//Codigo:
+Versao: 0.0.3
 
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
+Data: 01/06/2026
+
+Descricao do codigo: Atualizar o pacote command_runner
+
+Atualize o command_runner pacote para exportar console.dart.
+
+Abra o arquivo command_runner/lib/command_runner.dart e adicione a seguinte linha:
+
+command_runner/lib/command_runner.dart
 library;
 
 export 'src/arguments.dart';
 export 'src/command_runner_base.dart';
-export 'src/help_command.dart';
 export 'src/exceptions.dart';
+export 'src/help_command.dart';
+export 'src/console.dart'; // Add this line
+
+// TODO: Export any libraries intended for clients of this package. 
+
+Codigo:
+
+library;
+
+export 'src/arguments.dart';
+export 'src/command_runner_base.dart';
+export 'src/exceptions.dart';
+export 'src/help_command.dart';
+export 'src/console.dart'; 
 
 // TODO: Export any libraries intended for clients of this package.
+
+-------------------------------------------------------------------------------
+*/
+//Codigo ate aqui:
+
+//Codigo:
+
+library;
+
+export 'src/arguments.dart';
+export 'src/command_runner_base.dart';
+export 'src/exceptions.dart';
+export 'src/help_command.dart';
+export 'src/console.dart'; 
 
