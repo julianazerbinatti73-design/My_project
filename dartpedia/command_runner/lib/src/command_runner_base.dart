@@ -495,39 +495,62 @@ String _removeDash(String input) {
 }
 
 -------------------------------------------------------------------------------
-*/
-//Codigo ate aqui: 
+Versao: 0.0.4
 
-//Codigo: 
+Data: 09/06/2026
 
-import 'dart:async';
-import 'dart:collection';
-import 'dart:io';
+Descricao do codigo: Adicionar um onOutputretorno de chamada
 
-import 'arguments.dart';
-import 'exceptions.dart';
+Em seguida, adicione um onOutputargumento para CommandRunnerpermitir o tratamento flexível da saída.
+
+Abra o command_runner/lib/src/command_runner_base.dartarquivo.
+
+Adicione o onOutputargumento ao CommandRunnerconstrutor e o onOutputmembro correspondente à classe.
 
 class CommandRunner {
-  CommandRunner({this.onError});
+  CommandRunner({this.onOutput, this.onError});
 
-  final Map<String, Command> _commands = <String, Command>{};
-
-  UnmodifiableSetView<Command> get commands =>
-      UnmodifiableSetView<Command>(<Command>{..._commands.values});
+  /// If not null, this method is used to handle output. Useful if you want to
+  /// execute code before the output is printed to the console, or if you
+  /// want to do something other than print output the console.
+  /// If null, the onInput method will [print] the output.
+  FutureOr<void> Function(String)? onOutput;
 
   FutureOr<void> Function(Object)? onError;
 
-  String get usage {
-    return _commands.keys.join('\n');
-  }
+  // ... rest of the class
+}
+
+Codigo : 
+*/
+
+class CommandRunner {
+  CommandRunner({this.onOutput, this.onError});
+
+  /// If not null, this method is used to handle output. Useful if you want to
+  /// execute code before the output is printed to the console, or if you
+  /// want to do something other than print output the console.
+  /// If null, the onInput method will [print] the output.
+  FutureOr<void> Function(String)? onOutput;
+
+  FutureOr<void> Function(Object)? onError;
+
+  // ... rest of the class
+}
+
+//Update the run method to use the onOutput argument.  
+
 
   Future<void> run(List<String> input) async {
     try {
       final ArgResults results = parse(input);
-
       if (results.command != null) {
         Object? output = await results.command!.run(results);
-        print(output.toString());
+        if (onOutput != null) {
+          await onOutput!(output.toString());
+        } else {
+          print(output.toString());
+        }
       }
     } on Exception catch (exception) {
       if (onError != null) {
@@ -537,113 +560,4 @@ class CommandRunner {
       }
     }
   }
-
-  void addCommand(Command command) {
-    _commands[command.name] = command;
-    command.runner = this;
-  }
-
-  ArgResults parse(List<String> input) {
-    ArgResults results = ArgResults();
-
-    if (input.isEmpty) return results;
-
-    if (_commands.containsKey(input.first)) {
-      results.command = _commands[input.first];
-      input = input.sublist(1);
-    } else {
-      throw ArgumentException(
-        'The first word of input must be a command.',
-        null,
-        input.first,
-      );
-    }
-
-    if (results.command != null &&
-        input.isNotEmpty &&
-        _commands.containsKey(input.first)) {
-      throw ArgumentException(
-        'Input can only contain one command. Got ${input.first} and ${results.command!.name}',
-        null,
-        input.first,
-      );
-    }
-
-    Map<Option, Object?> inputOptions = {};
-    int i = 0;
-
-    while (i < input.length) {
-      if (input[i].startsWith('-')) {
-        var base = _removeDash(input[i]);
-
-        var option = results.command!.options.firstWhere(
-          (option) => option.name == base || option.abbr == base,
-          orElse: () {
-            throw ArgumentException(
-              'Unknown option ${input[i]}',
-              results.command!.name,
-              input[i],
-            );
-          },
-        );
-
-        if (option.type == OptionType.flag) {
-          inputOptions[option] = true;
-          i++;
-          continue;
-        }
-
-        if (option.type == OptionType.option) {
-          if (i + 1 >= input.length) {
-            throw ArgumentException(
-              'Option ${option.name} requires an argument',
-              results.command!.name,
-              option.name,
-            );
-          }
-
-          if (input[i + 1].startsWith('-')) {
-            throw ArgumentException(
-              'Option ${option.name} requires an argument, but got another option ${input[i + 1]}',
-              results.command!.name,
-              option.name,
-            );
-          }
-
-          var arg = input[i + 1];
-          inputOptions[option] = arg;
-          i++;
-        }
-      } else {
-        if (results.commandArg != null &&
-            results.commandArg!.isNotEmpty) {
-          throw ArgumentException(
-            'Commands can only have up to one argument.',
-            results.command!.name,
-            input[i],
-          );
-        }
-
-        results.commandArg = input[i];
-      }
-
-      i++;
-    }
-
-    results.options = inputOptions;
-
-    return results;
-  }
-
-  String _removeDash(String input) {
-    if (input.startsWith('--')) {
-      return input.substring(2);
-    }
-
-    if (input.startsWith('-')) {
-      return input.substring(1);
-    }
-
-    return input;
-  }
-}
+ 
