@@ -521,8 +521,31 @@ class CommandRunner {
   // ... rest of the class
 }
 
+Atualize o runmétodo para usar o onOutputargumento.
+
+  Future<void> run(List<String> input) async {
+    try {
+      final ArgResults results = parse(input);
+      if (results.command != null) {
+        Object? output = await results.command!.run(results);
+        if (onOutput != null) {
+          await onOutput!(output.toString());
+        } else {
+          print(output.toString());
+        }
+      }
+    } on Exception catch (exception) {
+      if (onError != null) {
+        onError!(exception);
+      } else {
+        rethrow;
+      }
+    }
+  }
+Isso atualiza o runmétodo para usar a onOutputfunção se ela for fornecida; caso contrário, o padrão é imprimir no console. 
+
+
 Codigo : 
-*/
 
 class CommandRunner {
   CommandRunner({this.onOutput, this.onError});
@@ -560,4 +583,44 @@ class CommandRunner {
       }
     }
   }
- 
+-------------------------------------------------------------------------------
+
+Codigo ate aqui : 
+*/
+
+class CommandRunner {
+  CommandRunner({this.onOutput, this.onError});
+
+  /// If not null, this method is used to handle output. Useful if you want to
+  /// execute code before the output is printed to the console, or if you
+  /// want to do something other than print output the console.
+  /// If null, the onInput method will [print] the output.
+  FutureOr<void> Function(String)? onOutput;
+
+  FutureOr<void> Function(Object)? onError;
+
+  // ... rest of the class
+}
+
+//Update the run method to use the onOutput argument.  
+
+
+  Future<void> run(List<String> input) async {
+    try {
+      final ArgResults results = parse(input);
+      if (results.command != null) {
+        Object? output = await results.command!.run(results);
+        if (onOutput != null) {
+          await onOutput!(output.toString());
+        } else {
+          print(output.toString());
+        }
+      }
+    } on Exception catch (exception) {
+      if (onError != null) {
+        onError!(exception);
+      } else {
+        rethrow;
+      }
+    }
+  }  
