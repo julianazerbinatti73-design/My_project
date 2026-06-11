@@ -226,14 +226,31 @@
 #
 #------------------------------------------------------------------------------
 #
-#Codigo ate aqui:
+#
+# Versao: 0.0.3
+#
+# Data:11/06/2026
+
+# Descricao do codigo: 
+#Para cada um dos seus subpacotes ( cli, command_runner, e wikipedia), abra seus respectivos pubspec.yamlarquivos e adicione resolution: workspaceao pubspec.yaml. Isso instrui o Dart a resolver as dependências dentro do espaço de trabalho.
+
+#Para cli/pubspec.yaml:
+
+# ... (existing content) ...
+#name: cli
+#description: A sample command-line application.
+#version: 1.0.0
+#resolution: workspace # Add this line
+# ... (existing content) ...
 #
 #Codigo:
+
 
 name: cli
 publish_to: none
 description: A sample command-line application.
 version: 1.0.0
+resolution: workspace # Add this line
 repository: https://github.com/my_org/my_repo
 
 environment:
