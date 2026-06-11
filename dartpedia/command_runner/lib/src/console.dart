@@ -375,6 +375,8 @@ Código ate aqui :
 */
 
 // Add this code to the bottom of the file
+
+import 'package:command_runner/command_runner.dart';
 extension TextRenderUtils on String {
   String get errorText => ConsoleColor.red.applyForeground(this);
   String get instructionText => ConsoleColor.yellow.applyForeground(this);
