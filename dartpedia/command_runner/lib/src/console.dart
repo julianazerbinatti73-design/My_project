@@ -371,10 +371,15 @@ extension TextRenderUtils on String {
 -------------------------------------------------------------------------------
 
 Código ate aqui : 
-
 */
 
 import 'dart:io';
+import 'dart:async';
+
+import 'package:command_runner/command_runner.dart';
+
+import 'console.dart';
+import 'exceptions.dart';
 
 const String ansiEscapeLiteral = '\x1B';
 
@@ -383,6 +388,7 @@ const String ansiEscapeLiteral = '\x1B';
 /// between each line print.
 Future<void> write(String text, {int duration = 50}) async {
   final List<String> lines = text.split('\n');
+
   for (final String l in lines) {
     await _delayedPrint('$l \n', duration: duration);
   }
@@ -426,20 +432,12 @@ enum ConsoleColor {
   final int b;
 
   /// Change text color for all future output (until reset)
-  /// ```dart
-  /// print('hello'); // prints in terminal default color
-  /// print(ConsoleColor.red.enableForeground);
-  /// print('hello'); // prints in red color
-  /// ```
-  String get enableForeground => '$ansiEscapeLiteral[38;2;$r;$g;${b}m';
+  String get enableForeground =>
+      '$ansiEscapeLiteral[38;2;$r;$g;${b}m';
 
   /// Change text color for all future output (until reset)
-  /// ```dart
-  /// print('hello'); // prints in terminal default color
-  /// print(ConsoleColor.red.enableBackground);
-  /// print('hello'); // prints with red background color
-  /// ```
-  String get enableBackground => '$ansiEscapeLiteral[48;2;$r;$g;${b}m';
+  String get enableBackground =>
+      '$ansiEscapeLiteral[48;2;$r;$g;${b}m';
 
   /// Reset text and background color to terminal defaults
   static String get reset => '$ansiEscapeLiteral[0m';
@@ -454,27 +452,33 @@ enum ConsoleColor {
     return '$ansiEscapeLiteral[48;2;$r;$g;${b}m$text$ansiEscapeLiteral[0m';
   }
 }
-// Add this code to the bottom of the file
 
-import 'package:command_runner/command_runner.dart';
+/// Utility methods for rendering text
 extension TextRenderUtils on String {
   String get errorText => ConsoleColor.red.applyForeground(this);
-  String get instructionText => ConsoleColor.yellow.applyForeground(this);
-  String get titleText => ConsoleColor.lightBlue.applyForeground(this);
+
+  String get instructionText =>
+      ConsoleColor.yellow.applyForeground(this);
+
+  String get titleText =>
+      ConsoleColor.lightBlue.applyForeground(this);
 
   List<String> splitLinesByLength(int length) {
     final List<String> words = split(' ');
     final List<String> output = <String>[];
     final StringBuffer strBuffer = StringBuffer();
+
     for (int i = 0; i < words.length; i++) {
       final String word = words[i];
+
       if (strBuffer.length + word.length <= length) {
         strBuffer.write(word.trim());
+
         if (strBuffer.length + 1 <= length) {
           strBuffer.write(' ');
         }
       }
-      // If the next word surpasses length, start the next line
+
       if (i + 1 < words.length &&
           words[i + 1].length + strBuffer.length + 1 > length) {
         output.add(strBuffer.toString().trim());
@@ -482,9 +486,7 @@ extension TextRenderUtils on String {
       }
     }
 
-    // Add left overs
     output.add(strBuffer.toString().trim());
     return output;
   }
-}
- 
+} 
