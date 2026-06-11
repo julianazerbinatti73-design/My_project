@@ -1337,7 +1337,7 @@ void main(List<String> arguments) {
 Codigo ate aqui:
 
 Codigo : 
-*/
+
 import 'package:command_runner/command_runner.dart';
 
 const version = '0.0.16';
@@ -1356,4 +1356,64 @@ void main(List<String> arguments) {
   )..addCommand(HelpCommand());
   commandRunner.run(arguments);
  }  
+
+-------------------------------------------------------------------------------
+
+Versao 0.0.17
+
+Data: 11/06/2026
+
+Descricao do codigo: Use o onOutputretorno de chamada
+#
+Por fim, atualize seu aplicativo principal para usar o novo onOutputrecurso.
+
+Abra o cli/bin/cli.dartarquivo.
+
+Atualize a mainfunção para passá-la onOutputpara o CommandRunner. Você também precisará adicionar uma importação para console.darttornar a writefunção disponível.
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner(
+    onOutput: (String output) async {
+      await write(output);
+    },
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+Codigo: 
+*/
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.1';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner(
+    onOutput: (String output) async {
+      await write(output);
+    },
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
 
