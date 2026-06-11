@@ -176,14 +176,97 @@ Saida: Analyzinf command_runner...
 No issues found!
 
 -------------------------------------------------------------------------------
-*/
-//Codigo ate aqui:
 
-//Codigo:
+Versao: 0.0.2
+
+Data: 09/06/2026
+
+Descricao do codigo: Melhorar a HelpCommand produção
+
+Aprimore a documentação HelpCommand para fornecer informações de uso mais detalhadas, incluindo opções e suas descrições. Isso facilitará a compreensão do uso do seu aplicativo de linha de comando pelos usuários.
+
+1. Abra o command_runner/lib/src/help_command.dart arquivo.
+
+2. Adicione as importações para `color` console.dart e `color` exceptions.dart no início do arquivo. Voce precisa delas para usar as extensões de cor e para gerar um erro ArgumentException.
+
+import 'dart:async';
+
+import 'package:command_runner/command_runner.dart';
+
+import 'console.dart';
+import 'exceptions.dart';
+
+3. Substitua o método existente run pelo seguinte. Esta nova versão utiliza um `std::vector` StringBuffer para construir a string de ajuda de forma eficiente e inclui lógica para lidar com saídas detalhadas.
+
+@override
+FutureOr<String> run(ArgResults args) async {
+  final buffer = StringBuffer();
+  buffer.writeln(runner.usage.titleText);
+
+  if (args.flag('verbose')) {
+    for (var cmd in runner.commands) {
+      buffer.write(_renderCommandVerbose(cmd));
+    }
+
+    return buffer.toString();
+  }
+
+  if (args.hasOption('command')) {
+    var (:option, :input) = args.getOption('command');
+
+    var cmd = runner.commands.firstWhere(
+      (command) => command.name == input,
+      orElse: () {
+        throw ArgumentException(
+          'Input ${args.commandArg} is not a known command.',
+        );
+      },
+    );
+
+    return _renderCommandVerbose(cmd);
+  }
+
+  // Verbose is false and no arg was passed in, so print basic usage.
+  for (var command in runner.commands) {
+    buffer.writeln(command.usage);
+  }
+
+  return buffer.toString();
+}
+
+StringBuffer é uma classe Dart que permite construir strings de forma eficiente. Ela oferece melhor desempenho do que o + operador `concat`, especialmente ao realizar várias concatenações dentro de um loop.
+
+4. Adicione o _renderCommandVerbose método auxiliar privado à HelpCommand classe. Este método formata a saída detalhada para um único comando.
+
+String _renderCommandVerbose(Command cmd) {
+  final indent = ' ' * 10;
+  final buffer = StringBuffer();
+  buffer.writeln(cmd.usage.instructionText); //abbr, name: description
+  buffer.writeln('$indent ${cmd.help}');
+  if (cmd.valueHelp != null) {
+    buffer.writeln(
+      '$indent [Argument] Required? ${cmd.requiresArgument}, Type: ${cmd.valueHelp}, Default: ${cmd.defaultValue ?? 'none'}',
+    );
+  }
+  buffer.writeln('$indent Options:');
+  for (var option in cmd.options) {
+    buffer.writeln('$indent ${option.usage}');
+  }
+  return buffer.toString();
+}
+
+Codigo:
 
 import 'dart:async';
 
 import 'arguments.dart';
+
+import 'package:command_runner/command_runner.dart';
+
+import 'console.dart';
+
+import 'exceptions.dart';
+
 
 class HelpCommand extends Command {
   @override
@@ -202,13 +285,146 @@ class HelpCommand extends Command {
   String? get valueHelp => null;
 
   @override
-  FutureOr<Object?> run(ArgResults args) async {
-    var usageText = runner.usage;
+FutureOr<String> run(ArgResults args) async {
+  final buffer = StringBuffer();
+  buffer.writeln(runner.usage.titleText);
 
-    for (var command in runner.commands) {
-      usageText += '\n${command.name}';
+  if (args.flag('verbose')) {
+    for (var cmd in runner.commands) {
+      buffer.write(_renderCommandVerbose(cmd));
     }
 
-    return usageText;
+    return buffer.toString();
+  }
+
+  if (args.hasOption('command')) {
+    var (:option, :input) = args.getOption('command');
+
+    var cmd = runner.commands.firstWhere(
+      (command) => command.name == input,
+      orElse: () {
+        throw ArgumentException(
+          'Input ${args.commandArg} is not a known command.',
+        );
+      },
+    );
+
+    return _renderCommandVerbose(cmd);
+  }
+
+for (var command in runner.commands) {
+    buffer.writeln(command.usage);
+  }
+
+  return buffer.toString();
+}
+
+String _renderCommandVerbose(Command cmd) {
+  final indent = ' ' * 10;
+  final buffer = StringBuffer();
+  buffer.writeln(cmd.usage.instructionText); //abbr, name: description
+  buffer.writeln('$indent ${cmd.help}');
+  if (cmd.valueHelp != null) {
+    buffer.writeln(
+      '$indent [Argument] Required? ${cmd.requiresArgument}, Type: ${cmd.valueHelp}, Default: ${cmd.defaultValue ?? 'none'}',
+    );
+  }
+  buffer.writeln('$indent Options:');
+  for (var option in cmd.options) {
+    buffer.writeln('$indent ${option.usage}');
+  }
+  return buffer.toString();
+}
+
+Saida padrao ao executar o codigo:
+
+Comando: dart analyze
+
+Saida: Analyzinf command_runner... 
+No issues found!
+
+-------------------------------------------------------------------------------
+*/
+
+// Codigo ate aqui:
+
+// Codigo:
+
+import 'dart:async';
+
+import 'arguments.dart';
+
+import 'package:command_runner/command_runner.dart';
+
+import 'console.dart';
+import 'exceptions.dart';
+
+class HelpCommand extends Command {
+  @override
+  String get name => 'help';
+
+  @override
+  String get description => 'Displays help information.';
+
+  @override
+  String? get help => 'Displays help information.';
+
+  @override
+  String? get defaultValue => null;
+
+  @override
+  String? get valueHelp => null;
+
+  @override
+  FutureOr<String> run(ArgResults args) async {
+    final buffer = StringBuffer();
+    buffer.writeln(runner.usage.titleText);
+
+    if (args.flag('verbose')) {
+      for (var cmd in runner.commands) {
+        buffer.write(_renderCommandVerbose(cmd));
+    }
+
+      return buffer.toString();
+    }
+
+    if (args.hasOption('command')) {
+      var (:option, :input) = args.getOption('command');
+
+      var cmd = runner.commands.firstWhere(
+        (command) => command.name == input,
+        orElse: () {
+          throw ArgumentException(
+            'Input ${args.commandArg} is not a known command.',
+          );
+       },
+    );
+
+      return _renderCommandVerbose(cmd);
+    }
+
+    // Verbose is false and no arg was passed in, so print basic usage.
+    for (var command in runner.commands) {
+      buffer.writeln(command.usage);
+    }
+
+    return buffer.toString();
+    }
+
+  String _renderCommandVerbose(Command cmd) {
+    final indent = ' ' * 10;
+    final buffer = StringBuffer();
+    buffer.writeln(cmd.usage.instructionText); //abbr, name: description
+    buffer.writeln('$indent ${cmd.help}');
+    if (cmd.valueHelp != null) {
+      buffer.writeln(
+        '$indent [Argument] Required? ${cmd.requiresArgument}, Type: ${cmd.valueHelp}, Default: ${cmd.defaultValue ?? 'none'}',
+      );
+    }
+    buffer.writeln('$indent Options:');
+    for (var option in cmd.options) {
+      buffer.writeln('$indent ${option.usage}');
+    }
+    return buffer.toString();
   }
 }
