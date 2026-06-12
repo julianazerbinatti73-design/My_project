@@ -31,7 +31,8 @@ sudo apt install -y apt-transport-https wget gnupg
 
 Depois:
 
-wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/dart.gpg
+wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub 
+sudo gpg --dearmor -o /usr/share/keyrings/dart.gpg
 
 depois:
 
