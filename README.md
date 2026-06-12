@@ -27,11 +27,13 @@ Estão familiarizados com princípios de programação orientada a objetos, como
 Abra o terminal e execute:
 
 sudo apt update
+
 sudo apt install -y apt-transport-https wget gnupg
 
 Depois:
 
 wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub 
+
 sudo gpg --dearmor -o /usr/share/keyrings/dart.gpg
 
 depois:
@@ -41,6 +43,7 @@ echo "deb [signed-by=/usr/share/keyrings/dart.gpg] https://storage.googleapis.co
 depois:
 
 sudo apt update
+
 sudo apt install dart
 
 e depois:
