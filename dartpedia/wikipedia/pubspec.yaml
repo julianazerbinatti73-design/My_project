@@ -1,4 +1,28 @@
+#-------------------------------------------------------------------------------
+#
+# Informacoes:
+#
+# O arquivo pubspec.yaml faz parte do projeto cli.dart .
+# Primeiro, você precisa confirmar que o pacote é Já é uma dependência de desenvolvimento no seu projeto.
+#
+# pubspec.yaml - Localizado em /dartpedia/wikipedia/lib/src/model/pubspec.yaml
+#
+# Outras informacoes importantes sobre o pacote:
+#
+# site : 
+#
+# Autor : Juliana Zerbinatti Sendon Garrido <julianazerbinattu73@gmail.com>
+#
+# Manutencao : 
 # -----------------------------------------------------------------------------
+# Data: 11/06/2026
+#
+# Versao: 0.0.0
+#
+# Descricao do codigo: Codigo original
+#
+# Codigo:
+#
 #name: wikipedia
 #description: A sample command-line application.
 #version: 1.0.0
@@ -15,6 +39,34 @@
 # lints: ^6.0.0
 # test: ^1.25.6
 #------------------------------------------------------------------------------
+#
+# Versao: 0.0.1
+#
+# Data: 12/06/2026
+#
+# Descricao do codigo: Tarefa 1: Adicionar a dependência do teste
+#
+#Primeiro, você precisa confirmar que o pacote é Já é uma dependência de desenvolvimento no seu projeto. test
+
+#Abra o arquivo dentro do seu projeto.wikipedia/pubspec.yaml
+
+#Localize a seção.dev_dependencies
+
+#Verifique se (ou a versão estável mais recente) está presente sob .test: ^1.24.0dev_dependencies
+
+  #dev_dependencies:
+  # lints: ^5.0.0
+    #  test: ^1.24.0
+    #Se a dependência estiver faltando, adicione-a ao seu arquivo. O símbolo permite o uso de versões compatíveis.testpubspec.yaml^
+
+#Se você fez alguma alteração no arquivo, salve e Execute seu terminal a partir do diretório. Esse comando recupera quaisquer dependências adicionadas e Disponibiliza para uso no seu projeto.pubspec.yamldart pub getwikipedia
+
+#Você deve ver uma saída semelhante a esta:
+
+  #Resolving dependencies...
+#Downloading packages...
+#+ test 1.25.1
+#Changed 2 dependencies!
 
 
 
