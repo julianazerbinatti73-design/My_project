@@ -47,7 +47,7 @@ class Article {
   }
 }
 Este código define uma Articleclasse com propriedades para o título e o resumo de um artigo. O listFromJsonmétodo utiliza correspondência de padrões para extrair os dados do objeto JSON e criar uma lista de Articleinstâncias. O toJsonmétodo converte o Articleobjeto de volta para um objeto JSON. O toStringmétodo fornece uma maneira conveniente de imprimir o conteúdo do Articleobjeto.
-
+oioi
 Codigo: 
 */
 
@@ -84,4 +84,6 @@ class Article {
     return 'Article{title: $title, extract: $extract}';
   }
 }
+
+
 
