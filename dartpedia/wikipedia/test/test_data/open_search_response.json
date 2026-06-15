@@ -1,0 +1,73 @@
+[
+    "dart",
+    [
+        "Dart",
+        "Darth Vader",
+        "Dartmouth College",
+        "Darts",
+        "Darth Maul",
+        "Dartford Crossing",
+        "Dart (programming language)",
+        "Dartmouth College fraternities and sororities",
+        "Dartmoor",
+        "Dartmouth, Massachusetts"
+    ],
+    [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    [
+        "https://en.wikipedia.org/wiki/Dart",
+        "https://en.wikipedia.org/wiki/Darth_Vader",
+        "https://en.wikipedia.org/wiki/Dartmouth_College",
+        "https://en.wikipedia.org/wiki/Darts",
+        "https://en.wikipedia.org/wiki/Darth_Maul",
+        "https://en.wikipedia.org/wiki/Dartford_Crossing",
+        "https://en.wikipedia.org/wiki/Dart_(programming_language)",
+        "https://en.wikipedia.org/wiki/Dartmouth_College_fraternities_and_sororities",
+        "https://en.wikipedia.org/wiki/Dartmoor",
+        "https://en.wikipedia.org/wiki/Dartmouth,_Massachusetts"
+    ]
+]
+
+void main() {
+  group('deserialize example JSON responses from wikipedia API', () {
+    test('deserialize Dart Programming Language page summary example data from '
+          'json file into a Summary object', () async {
+      final String pageSummaryInput =
+          await File(dartLangSummaryJson).readAsString();
+      final Map<String, Object?> pageSummaryMap =
+          jsonDecode(pageSummaryInput) as Map<String, Object?>;
+      final Summary summary = Summary.fromJson(pageSummaryMap);
+      expect(summary.titles.canonical, 'Dart_(programming_language)');
+    });
+
+    test('deserialize Cat article example data from json file into '
+        'an Article object', () async {
+      final String articleJson = await File(catExtractJson).readAsString();
+      final Map<String, Object?> articleMap =
+          jsonDecode(articleJson) as Map<String, Object?>;
+      final List<Article> articles = Article.listFromJson(articleMap);
+      expect(articles.first.title.toLowerCase(), 'cat');
+    });
+
+    test('deserialize Open Search results example data from json file '
+        'into an SearchResults object', () async {
+      final String resultsString =
+          await File(openSearchResponse).readAsString();
+      final List<Object?> resultsAsList =
+          jsonDecode(resultsString) as List<Object?>;
+      final SearchResults results = SearchResults.fromJson(resultsAsList);
+      expect(results.results.length, greaterThan(1));
+    });
+  });
+}
+
