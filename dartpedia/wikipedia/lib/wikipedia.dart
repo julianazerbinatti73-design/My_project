@@ -1,6 +1,3 @@
-int calculate() {
-  return 6 * 7;
-}
 
 export 'src/api/get_article.dart';
 export 'src/api/search.dart';
