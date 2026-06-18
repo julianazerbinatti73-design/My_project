@@ -16,10 +16,10 @@
       "name": "cli",
       "version": "1.0.0",
       "dependencies": [
-        "args",
         "command_runner",
         "http",
-        "path"
+        "path",
+        "wikipedia"
       ],
       "devDependencies": [
         "lints",
@@ -96,11 +96,6 @@
     {
       "name": "path",
       "version": "1.9.1",
-      "dependencies": []
-    },
-    {
-      "name": "args",
-      "version": "2.7.0",
       "dependencies": []
     },
     {
@@ -431,6 +426,11 @@
         "async",
         "path"
       ]
+    },
+    {
+      "name": "args",
+      "version": "2.7.0",
+      "dependencies": []
     },
     {
       "name": "term_glyph",
