@@ -17,7 +17,7 @@
 name: command_runner
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
-  resolution: workspace # Add this line
+resolution: workspace
 # repository: https://github.com/my_org/my_repo
 
 environment:
@@ -25,6 +25,6 @@ environment:
 
 # Add regular dependencies here.
 dev_dependencies:
-  lints: ^6.0.0
+  lints: ^5.0.0
   test: ^1.25.6
 #~                

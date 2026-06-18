@@ -1,4 +1,45 @@
+#-------------------------------------------------------------------------------
+#
+# Informacoes:
+#
+# O arquivo pubspec.yaml faz parte do projeto cli.dart .
+# Primeiro, você precisa confirmar que o pacote é Já é uma dependência de desenvolvimento no seu projeto.
+#
+# pubspec.yaml - Localizado em /dartpedia/wikipedia/lib/src/model/pubspec.yaml
+#
+# Outras informacoes importantes sobre o pacote:
+#
+# site : 
+#
+# Autor : Juliana Zerbinatti Sendon Garrido <julianazerbinattu73@gmail.com>
+#
+# Manutencao : 
 # -----------------------------------------------------------------------------
+# 
+# 200~Dicionario do Versionamento:
+#
+# v = versao
+#
+# 0 = Inicio do versionamento
+#
+# . = Implementacao de versionamento
+#
+# 1 = Proxima versao, 2, proxima versao, e assim por diante.
+#
+# -------------------------------------------------------------------------------
+#
+# Historico de Versionamento:
+#
+# -------------------------------------------------------------------------------
+# 
+# Data: 11/06/2026
+#
+# Versao: 0.0.0
+#
+# Descricao do codigo: Codigo original
+#
+# Codigo:
+#
 #name: wikipedia
 #description: A sample command-line application.
 #version: 1.0.0
@@ -15,14 +56,118 @@
 # lints: ^6.0.0
 # test: ^1.25.6
 #------------------------------------------------------------------------------
+#
+# Versao: 0.0.1
+#
+# Data: 12/06/2026
+#
+# Descricao do codigo: Tarefa 1: Adicionar a dependência do teste
+#
+#Primeiro, você precisa confirmar que o pacote é Já é uma dependência de desenvolvimento no seu projeto. test
+
+#Abra o arquivo dentro do seu projeto.wikipedia/pubspec.yaml
+
+#Localize a seção.dev_dependencies
+
+#Verifique se (ou a versão estável mais recente) está presente sob .test: ^1.24.0dev_dependencies
+
+  #dev_dependencies:
+  # lints: ^5.0.0
+    #  test: ^1.24.0
+    #Se a dependência estiver faltando, adicione-a ao seu arquivo. O símbolo permite o uso de versões compatíveis.testpubspec.yaml^
+
+#Se você fez alguma alteração no arquivo, salve e Execute seu terminal a partir do diretório. Esse comando recupera quaisquer dependências adicionadas e Disponibiliza para uso no seu projeto.pubspec.yamldart pub getwikipedia
+
+#Você deve ver uma saída semelhante a esta:
+
+  #Resolving dependencies...
+#Downloading packages...
+#+ test 1.25.1
+#Changed 2 dependencies!
+#
+#Codigo:
+#name: wikipedia
+#description: A sample command-line application.
+#version: 1.0.0
+#  resolution: workspace # Add this line
+  # repository: https://github.com/my_org/my_repo
+
+  #environment:
+  # sdk: ^3.12.1
+
+# Add regular dependencies here.
+#dependencies:
+  #  path: ^1.9.0
+
+  #dev_dependencies:
+  # lints: ^6.0.0
+  # test: ^1.25.6
+
+#-----------------------------------------------------------------
+#
+#Versao: 0.0.1
+#
+#Data: 16/06/2026
+#
+#Descricao do codigo: Adicionar a dependência http ao pacote wikipedia
+#
+#Para fazer requisições HTTP, você precisa adicionar o http pacote como uma dependência do wikipedia pacote.
+#
+#1. Abra o wikipedia/pubspec.yaml arquivo dentro do seu projeto.
+#
+#2. Localize a dependencies seção.
+#
+#3. Adicione http: ^1.3.0(ou a versão estável mais recente) em dependencies.
+
+#dependencies:
+#  http: ^1.3.0
+#
+#4. Salve o pubspec.yaml arquivo.
+
+#5. Execute o comando dart pub get no seu terminal a partir do wikipedia diretório.
 
 
+#Codigo: 
+#
+#name: wikipedia
+#description: A sample command-line application.
+#version: 1.0.0
+#resolution: workspace
+  # repository: https://github.com/my_org/my_repo
 
+#environment:
+#sdk: ^3.12.1
+
+# Add regular dependencies here.
+#dependencies:
+#  path: ^1.9.0
+#  http: ^1.3.0
+
+#dev_dependencies:
+#  lints: ^5.0.0
+#  test: ^1.24.0
+
+#Saida padrao do codigo ate aqui: 
+#
+#Comado: dart pub get
+#
+#Saida: Resolving dependencies in `/home/maria_e_silva64/my_project/My_project/dartpedia`... 
+#Downloading packages... 
+#  lints 5.1.1 (6.1.0 available)
+#  package_config 2.2.0 (3.0.0 available)
+#Got dependencies in `/home/maria_e_silva64/my_project/My_project/dartpedia`!
+#2 packages have newer versions incompatible with dependency constraints.
+#Try `dart pub outdated` for more information.
+#
+#------------------------------------------------------------------------------
+#Codigo
+
+#Codigo ate aqui:
 
 name: wikipedia
 description: A sample command-line application.
 version: 1.0.0
-  resolution: workspace # Add this line
+resolution: workspace
   # repository: https://github.com/my_org/my_repo
 
 environment:
@@ -31,7 +176,8 @@ environment:
 # Add regular dependencies here.
 dependencies:
   path: ^1.9.0
+  http: ^1.3.0
 
 dev_dependencies:
-  lints: ^6.0.0
-  test: ^1.25.6
+  lints: ^5.0.0
+  test: ^1.24.0
