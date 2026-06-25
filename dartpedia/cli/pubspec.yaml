@@ -226,7 +226,6 @@
 #
 #------------------------------------------------------------------------------
 #
-#
 # Versao: 0.0.3
 #
 # Data:11/06/2026
@@ -245,29 +244,72 @@
 #
 #Codigo:
 
+#name: cli
+#publish_to: none
+#description: A sample command-line application.
+#version: 1.0.0
+#resolution: workspace # Add this line
+#repository: https://github.com/my_org/my_repo
 
+#environment:
+#  sdk:   ^3.11.3
+
+# Add regular dependencies here.
+#dependencies:
+#  path: ^1.9.0
+#  http: ^1.3.0
+#  command_runner:
+#   path: ../command_runner      
+#  wikipedia:
+#    path: ../wikipedia
+
+#oargs: ^2.7.0
+
+#dev_dependencies:
+#  lints: ^5.0.0
+#  test: ^1.24.0
+
+#------------------------------------------------------------------------------
+#
+#Versao: 0.0.4 
+#
+#Data: 18/06/2026
+#
+#Descricao do codigo: Adicionar o logging pacote
+#
+#Primeiro, adicione o logging pacote às dependências do seu projeto.
+
+#Abra o cli/pubspec.yamlarquivo.
+
+#Localize a dependenciesseção.
+
+#Adicione o logging pacote às suas dependências:
+#
+#Codigo: 
+#
 name: cli
 publish_to: none
 description: A sample command-line application.
 version: 1.0.0
-resolution: workspace # Add this line
+resolution: workspace 
 repository: https://github.com/my_org/my_repo
 
 environment:
   sdk:   ^3.11.3
 
-# Add regular dependencies here.
-dependencies:
+dependencies: 
   path: ^1.9.0
   http: ^1.3.0
   command_runner:
     path: ../command_runner
   wikipedia:
     path: ../wikipedia
-logging: ^1.2.0 
+logging: ^1.2.0   # Add the following line
 
 oargs: ^2.7.0
 
 dev_dependencies:
   lints: ^5.0.0
   test: ^1.24.0
+
+

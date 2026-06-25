@@ -1332,31 +1332,6 @@ void main(List<String> arguments) {
   )..addCommand(HelpCommand());
   commandRunner.run(arguments);
 }
-------------------------------------------------------------------------------- 
-
-Codigo ate aqui:
-
-Codigo : 
-
-import 'package:command_runner/command_runner.dart';
-
-const version = '0.0.16';
-
-void main(List<String> arguments) {
-  // [Step 6 update] Add onError method
-  var commandRunner = CommandRunner(
-    onError: (Object error) {
-      if (error is Error) {
-        throw error;
-      }
-      if (error is Exception) {
-        print(error);
-      }
-    },
-  )..addCommand(HelpCommand());
-  commandRunner.run(arguments);
- }  
-
 -------------------------------------------------------------------------------
 
 Versao 0.0.17
@@ -1367,13 +1342,13 @@ Descricao do codigo: Use o onOutputretorno de chamada
 #
 Por fim, atualize seu aplicativo principal para usar o novo onOutputrecurso.
 
-Abra o cli/bin/cli.dartarquivo.
+Abra o cli/bin/cli.dart arquivo.
 
 Atualize a mainfunção para passá-la onOutputpara o CommandRunner. Você também precisará adicionar uma importação para console.darttornar a writefunção disponível.
 
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.1';
+const version = '0.0.17';
 
 void main(List<String> arguments) {
   var commandRunner = CommandRunner(
@@ -1393,13 +1368,55 @@ void main(List<String> arguments) {
 }
 
 Codigo: 
-*/
 
 import 'package:command_runner/command_runner.dart';
+// Importação necessária para disponibilizar a função write
+import 'src/console.dart'; 
+
+const version = '0.0.17';
+
+void main(List<String> arguments) {
+  // Atualizado para incluir o método onOutput
+  var commandRunner = CommandRunner(
+    onOutput: (String output) async {
+      await write(output);
+    },
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
+  
+  commandRunner.run(arguments);
+}
+
+-------------------------------------------------------------------------------
+
+Versao: 0.0.18
+
+Data: 18/06/2026
+
+Descricao do codigo: Use o registrador em cli.dart
+
+Agora, utilize a initFileLogger função cli/bin/cli.dart para criar uma instância de logger e registrar mensagens em um arquivo.
+
+1.Abra o cli/bin/cli.dart arquivo.
+
+2.Adicione a importação para o logger:
+
+cli/bin/cli.dart
 import 'package:cli/cli.dart';
+import 'package:command_runner/command_runner.dart';
 
+3.Modifique a main função para inicializar o registrador de logs e passe-a para os comandos:
 
-const version = '0.0.2';
+cli/bin/cli.dart
+import 'package:cli/cli.dart';
+import 'package:command_runner/command_runner.dart';
 
 void main(List<String> arguments) async {
   final errorLogger = initFileLogger('errors');
@@ -1425,5 +1442,94 @@ void main(List<String> arguments) async {
         ..addCommand(SearchCommand(logger: errorLogger))
         ..addCommand(GetArticleCommand(logger: errorLogger));
 
+  app.run(arguments);
+}
+
+Este código faz o seguinte:
+
+Ele inicializa uma Logger instância usando initFileLogger('errors').
+Ele passa a logger instância para CommandRunner os comandos individuais.
+
+Codigo: 
+
+import 'package:cli/cli.dart';
+import 'package:command_runner/command_runner.dart';
+import 'src/console.dart'; 
+
+const version = '0.0.18';
+
+void main(List<String> arguments) async {
+  // 1. Inicializa o registrador de logs para o arquivo 'errors'
+  final errorLogger = initFileLogger('errors');
+
+  // 2. Configura o CommandRunner com onOutput, onError e os comandos
+  final app = CommandRunner(
+    onOutput: (String output) async {
+      await write(output);
+    },
+    onError: (Object error) {
+      if (error is Error) {
+        // Grava erros graves com StackTrace no arquivo de log
+        errorLogger.severe(
+          '[Error] ${error.toString()}\n${error.stackTrace}',
+        );
+        throw error;
+      }
+      if (error is Exception) {
+        // Grava exceções como aviso no arquivo de log e mostra na tela
+        errorLogger.warning(error);
+        print(error);
+      }
+    },
+  )
+    ..addCommand(HelpCommand())
+    ..addCommand(SearchCommand(logger: errorLogger))
+    ..addCommand(GetArticleCommand(logger: errorLogger));
+
+  // 3. Executa o aplicativo
+  app.run(arguments);
+}
+
+
+*/
+//Codigo ate aqui:
+
+//Codigo:
+
+import 'package:cli/cli.dart';
+import 'package:command_runner/command_runner.dart';
+import 'src/console.dart'; 
+
+const version = '0.0.18';
+
+void main(List<String> arguments) async {
+  // 1. Inicializa o registrador de logs para o arquivo 'errors'
+  final errorLogger = initFileLogger('errors');
+
+  // 2. Configura o CommandRunner com onOutput, onError e os comandos
+  final app = CommandRunner(
+    onOutput: (String output) async {
+      await write(output);
+    },
+    onError: (Object error) {
+      if (error is Error) {
+        // Grava erros graves com StackTrace no arquivo de log
+        errorLogger.severe(
+          '[Error] ${error.toString()}\n${error.stackTrace}',
+        );
+        throw error;
+      }
+      if (error is Exception) {
+        // Grava exceções como aviso no arquivo de log e mostra na tela
+        errorLogger.warning(error);
+        print(error);
+      }
+    },
+  )
+    ..addCommand(HelpCommand())
+    ..addCommand(SearchCommand(logger: errorLogger))
+    ..addCommand(GetArticleCommand(logger: errorLogger));
+
+  // 3. Executa o aplicativo
   app.run(arguments);
 }
