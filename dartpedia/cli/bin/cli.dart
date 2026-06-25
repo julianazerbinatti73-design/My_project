@@ -1498,7 +1498,7 @@ void main(List<String> arguments) async {
 
 import 'package:cli/cli.dart';
 import 'package:command_runner/command_runner.dart';
-import 'src/console.dart'; 
+import 'package:command_runner/src/console.dart';
 
 const version = '0.0.18';
 
@@ -1533,3 +1533,4 @@ void main(List<String> arguments) async {
   // 3. Executa o aplicativo
   app.run(arguments);
 }
+
